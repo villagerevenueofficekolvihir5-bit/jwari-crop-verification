@@ -780,3 +780,104 @@ input[type="file"]{
   }
 
 }
+/* =========================================
+   REPORT TITLE
+========================================= */
+
+.report-title{
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  color:#1b5e20;
+  margin-bottom:15px;
+  padding-bottom:10px;
+  border-bottom:2px solid #1b5e20;
+}
+
+
+/* =========================================
+   REPORT STATUS
+========================================= */
+
+#reportStatus{
+  margin-bottom:15px;
+  padding:10px;
+  border-radius:8px;
+  background:#e8f5e9;
+  color:#1b5e20;
+  font-weight:bold;
+}
+
+
+/* =========================================
+   REPORT ACTIONS
+========================================= */
+
+.report-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+
+
+/* EDIT BUTTON */
+
+.edit-btn{
+  background:#f9a825;
+  color:#ffffff;
+}
+
+
+/* SAVE BUTTON */
+
+.save-btn{
+  background:#2e7d32;
+  color:#ffffff;
+}
+
+
+/* NEW ENTRY BUTTON */
+
+.new-btn{
+  background:#455a64;
+  color:#ffffff;
+}
+
+
+/* BUTTON HOVER */
+
+.edit-btn:hover{
+  background:#e08a00;
+}
+
+.save-btn:hover{
+  background:#1b5e20;
+}
+
+.new-btn:hover{
+  background:#263238;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  .report-actions{
+    grid-template-columns:1fr;
+  }
+
+}
+
+
+/* PRINT */
+
+@media print{
+
+  .report-actions,
+  #reportStatus{
+    display:none !important;
+  }
+
+}
