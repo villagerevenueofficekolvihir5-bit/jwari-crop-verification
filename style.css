@@ -14,7 +14,7 @@ body{
   margin:0;
   padding:15px;
   background:#f1f5f1;
-  font-family:"Nirmala UI",Arial,sans-serif;
+  font-family:"Nirmala UI", Arial, sans-serif;
   color:#222;
 }
 
@@ -25,6 +25,7 @@ body{
 
 .container{
   max-width:700px;
+  width:100%;
   margin:auto;
 }
 
@@ -46,11 +47,7 @@ body{
 ========================================= */
 
 .header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-
+  width:100%;
   text-align:center;
 
   border-bottom:3px solid #1b5e20;
@@ -61,12 +58,27 @@ body{
 
 
 /* =========================================
+   HEADER ROW
+========================================= */
+
+.government-header{
+  width:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:12px;
+}
+
+
+/* =========================================
    LOGO BOX
 ========================================= */
 
 .logo-box{
-  width:975px;
-  min-width:975px;
+  width:75px;
+  min-width:75px;
 
   display:flex;
   align-items:center;
@@ -79,10 +91,13 @@ body{
 ========================================= */
 
 .gov-logo{
-  width:965px;
-  height:965px;
+  width:65px;
+  height:65px;
+
+  max-width:100%;
 
   object-fit:contain;
+
   display:block;
 }
 
@@ -93,6 +108,15 @@ body{
 
 .header-title{
   flex:1;
+
+  min-width:0;
+
+  display:flex;
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
   text-align:center;
 }
 
@@ -103,9 +127,12 @@ body{
 
 .header-title h1{
   margin:0;
+
   color:#1b5e20;
-  font-size:227px;
+
+  font-size:27px;
   font-weight:700;
+
   line-height:1.35;
 }
 
@@ -116,8 +143,23 @@ body{
 
 .header-title p{
   margin:6px 0 0;
+
   color:#666;
+
   font-size:16px;
+}
+
+
+/* =========================================
+   OFFICE NAME
+========================================= */
+
+.header-title small{
+  margin-top:4px;
+
+  color:#444;
+
+  font-size:15px;
 }
 
 
@@ -132,8 +174,11 @@ body{
 
 label{
   display:block;
+
   font-weight:bold;
+
   margin-bottom:6px;
+
   font-size:16px;
 }
 
@@ -147,7 +192,9 @@ select,
 textarea,
 button{
   width:100%;
+
   font-size:16px;
+
   border-radius:10px;
 }
 
@@ -156,8 +203,11 @@ input,
 select,
 textarea{
   border:1px solid #bdbdbd;
+
   padding:12px;
+
   background:#ffffff;
+
   color:#222;
 }
 
@@ -166,13 +216,16 @@ input:focus,
 select:focus,
 textarea:focus{
   outline:none;
+
   border-color:#1b5e20;
+
   box-shadow:0 0 0 3px rgba(27,94,32,.12);
 }
 
 
 textarea{
   min-height:90px;
+
   resize:vertical;
 }
 
@@ -183,10 +236,15 @@ textarea{
 
 button{
   padding:14px;
+
   border:none;
+
   cursor:pointer;
+
   font-weight:bold;
+
   margin-top:15px;
+
   transition:.2s;
 }
 
@@ -196,22 +254,32 @@ button:active{
 }
 
 
+/* GPS BUTTON */
+
 .secondary-btn{
   background:#455a64;
+
   color:#ffffff;
+
   font-size:17px;
 }
+
 
 .secondary-btn:hover{
   background:#37474f;
 }
 
 
+/* SUBMIT BUTTON */
+
 .submit-btn{
   background:#1b5e20;
+
   color:#ffffff;
+
   font-size:18px;
 }
+
 
 .submit-btn:hover{
   background:#134517;
@@ -220,6 +288,7 @@ button:active{
 
 button:disabled{
   opacity:.6;
+
   cursor:not-allowed;
 }
 
@@ -230,6 +299,7 @@ button:disabled{
 
 .gps-box{
   margin-top:20px;
+
   padding:15px;
 
   background:#e8f5e9;
@@ -246,20 +316,25 @@ button:disabled{
 
 .gps-success{
   background:#e8f5e9;
+
   border-left-color:#1b5e20;
 }
 
 
 .gps-error{
   background:#ffebee;
+
   border-left-color:#c62828;
+
   color:#b71c1c;
 }
 
 
 .gps-loading{
   background:#fff8e1;
+
   border-left-color:#f9a825;
+
   color:#795548;
 }
 
@@ -270,12 +345,31 @@ button:disabled{
 
 #preview{
   display:none;
+
   width:100%;
+
   max-height:500px;
+
   object-fit:cover;
+
   margin-top:15px;
+
   border-radius:10px;
+
   border:1px solid #ddd;
+}
+
+
+/* PHOTO NOTE */
+
+.photo-note{
+  display:block;
+
+  margin-top:7px;
+
+  color:#666;
+
+  font-size:14px;
 }
 
 
@@ -285,6 +379,7 @@ button:disabled{
 
 .ai-box{
   margin-top:18px;
+
   padding:15px;
 
   background:#f3f6ff;
@@ -299,21 +394,34 @@ button:disabled{
 }
 
 
+.ai-title{
+  font-weight:bold;
+
+  margin-bottom:6px;
+
+  color:#283593;
+}
+
+
 .ai-success{
   background:#e8f5e9;
+
   border-left-color:#1b5e20;
 }
 
 
 .ai-warning{
   background:#fff8e1;
+
   border-left-color:#f9a825;
 }
 
 
 .ai-error{
   background:#ffebee;
+
   border-left-color:#c62828;
+
   color:#b71c1c;
 }
 
@@ -324,6 +432,7 @@ button:disabled{
 
 #msg{
   margin-top:18px;
+
   padding:12px;
 
   border-radius:10px;
@@ -366,6 +475,7 @@ button:disabled{
   display:none;
 
   margin-top:22px;
+
   padding:20px;
 
   background:#ffffff;
@@ -402,7 +512,9 @@ button:disabled{
 
 .report-box hr{
   border:none;
+
   border-top:1px solid #ddd;
+
   margin:15px 0;
 }
 
@@ -413,18 +525,21 @@ button:disabled{
 
 .report-success{
   background:#e8f5e9;
+
   border-color:#1b5e20;
 }
 
 
 .report-warning{
   background:#fff8e1;
+
   border-color:#f9a825;
 }
 
 
 .report-error{
   background:#ffebee;
+
   border-color:#c62828;
 }
 
@@ -435,6 +550,7 @@ button:disabled{
 
 input[type="file"]{
   padding:10px;
+
   cursor:pointer;
 }
 
@@ -480,13 +596,39 @@ select{
 
 .print-btn{
   background:#1565c0;
+
   color:#ffffff;
+
   font-size:17px;
 }
 
 
 .print-btn:hover{
   background:#0d47a1;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer{
+  margin-top:25px;
+
+  padding-top:15px;
+
+  border-top:1px solid #ddd;
+
+  text-align:center;
+
+  color:#555;
+
+  line-height:1.6;
+}
+
+
+.footer small{
+  color:#777;
 }
 
 
@@ -508,36 +650,48 @@ select{
 
   .card{
     padding:15px;
+
     border-radius:14px;
   }
 
 
-  .header{
-    gap:5px;
-    padding-bottom:12px;
+  .government-header{
+    gap:6px;
   }
 
 
   .logo-box{
-    width:52px;
-    min-width:52px;
+    width:55px;
+
+    min-width:55px;
   }
 
 
   .gov-logo{
     width:48px;
+
     height:48px;
   }
 
 
   .header-title h1{
     font-size:22px;
+
     line-height:1.3;
   }
 
 
   .header-title p{
     font-size:14px;
+
+    margin-top:4px;
+  }
+
+
+  .header-title small{
+    font-size:13px;
+
+    margin-top:3px;
   }
 
 
@@ -583,25 +737,39 @@ select{
   }
 
 
+  .government-header{
+    gap:3px;
+  }
+
+
   .logo-box{
-    width:42px;
-    min-width:42px;
+    width:45px;
+
+    min-width:45px;
   }
 
 
   .gov-logo{
-    width:38px;
-    height:38px;
+    width:40px;
+
+    height:40px;
   }
 
 
   .header-title h1{
-    font-size:19px;
+    font-size:18px;
+
+    line-height:1.25;
   }
 
 
   .header-title p{
     font-size:12px;
+  }
+
+
+  .header-title small{
+    font-size:11px;
   }
 
 }
@@ -615,6 +783,7 @@ select{
 
   body{
     background:#ffffff;
+
     padding:0;
   }
 
@@ -626,7 +795,9 @@ select{
 
   .card{
     box-shadow:none;
+
     border-radius:0;
+
     padding:15px;
   }
 
@@ -638,15 +809,19 @@ select{
   .ai-box,
   #preview,
   #msg,
-  .print-btn{
+  .print-btn,
+  .footer{
     display:none !important;
   }
 
 
   .report-box{
     display:block !important;
+
     box-shadow:none;
+
     border:1px solid #000;
+
     margin-top:20px;
   }
 
