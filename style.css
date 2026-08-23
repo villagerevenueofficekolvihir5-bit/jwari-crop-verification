@@ -24,8 +24,8 @@ body{
 ========================================= */
 
 .container{
-  max-width:700px;
   width:100%;
+  max-width:700px;
   margin:auto;
 }
 
@@ -35,7 +35,7 @@ body{
 ========================================= */
 
 .card{
-  background:#ffffff;
+  background:#fff;
   border-radius:16px;
   padding:22px;
   box-shadow:0 5px 25px rgba(0,0,0,.12);
@@ -43,152 +43,108 @@ body{
 
 
 /* =========================================
-   HEADER - FORCE CENTER ALIGNMENT
+   GOVERNMENT HEADER
 ========================================= */
 
 .header{
-    width:100%;
-    border-bottom:3px solid #1b5e20;
-    margin-bottom:20px;
-    padding-bottom:14px;
+  width:100%;
+  border-bottom:3px solid #1b5e20;
+  margin-bottom:22px;
+  padding-bottom:15px;
 }
 
-/* तीन भाग एका ओळीत */
+
 .government-header{
-    width:100%;
-    display:grid !important;
-    grid-template-columns:60px 1fr 60px !important;
-    align-items:center !important;
-    gap:5px;
+  width:100%;
+  display:grid;
+  grid-template-columns:65px minmax(0,1fr) 65px;
+  align-items:center;
+  gap:8px;
 }
 
-/* डावा आणि उजवा लोगो */
+
+/* =========================================
+   LOGO
+========================================= */
+
 .logo-box{
-    width:60px !important;
-    min-width:60px !important;
-    height:60px;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
+  width:65px;
+  height:65px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* लोगो */
+
 .gov-logo{
-    width:55px !important;
-    height:55px !important;
-    max-width:55px !important;
-    max-height:55px !important;
-    object-fit:contain !important;
-    display:block !important;
+  width:60px;
+  height:60px;
+  max-width:100%;
+  object-fit:contain;
+  display:block;
 }
 
-/* मधला मजकूर */
+
+/* =========================================
+   HEADER TITLE
+========================================= */
+
 .header-title{
-    width:100%;
-    min-width:0;
-
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:center !important;
-
-    text-align:center !important;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
 
-/* मुख्य शीर्षक */
+
 .header-title h1{
-    margin:0 !important;
-    padding:0 !important;
-
-    color:#1b5e20 !important;
-
-    font-size:24px !important;
-    line-height:1.3 !important;
-
-    text-align:center !important;
+  margin:0;
+  padding:0;
+  color:#1b5e20;
+  font-size:25px;
+  font-weight:700;
+  line-height:1.3;
+  text-align:center;
 }
 
-/* Subtitle */
-.header-title p{
-    margin:4px 0 0 !important;
-    padding:0 !important;
-
-    font-size:14px !important;
-
-    text-align:center !important;
-}
-
-/* कार्यालयाचे नाव */
-.header-title small{
-    margin-top:3px;
-
-    font-size:13px;
-
-    text-align:center !important;
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media(max-width:600px){
-
-    .government-header{
-        grid-template-columns:50px 1fr 50px !important;
-        gap:3px;
-    }
-
-    .logo-box{
-        width:50px !important;
-        min-width:50px !important;
-        height:50px;
-    }
-
-    .gov-logo{
-        width:45px !important;
-        height:45px !important;
-        max-width:45px !important;
-        max-height:45px !important;
-    }
-
-    .header-title h1{
-        font-size:20px !important;
-        line-height:1.25 !important;
-    }
-
-    .header-title p{
-        font-size:13px !important;
-    }
-
-    .header-title small{
-        font-size:12px !important;
-    }
-}
-
-/* =========================================
-   ENGLISH SUBTITLE
-========================================= */
 
 .header-title p{
-  margin:6px 0 0;
-
+  margin:4px 0 0;
+  padding:0;
   color:#666;
+  font-size:14px;
+  text-align:center;
+}
 
-  font-size:16px;
+
+.header-title small{
+  display:block;
+  margin-top:4px;
+  color:#444;
+  font-size:13px;
+  text-align:center;
 }
 
 
 /* =========================================
-   OFFICE NAME
+   SECTION TITLE
 ========================================= */
 
-.header-title small{
-  margin-top:4px;
+.section-title{
+  margin-top:24px;
+  margin-bottom:8px;
+  padding:10px 12px;
 
-  color:#444;
+  background:#e8f5e9;
+  color:#1b5e20;
 
-  font-size:15px;
+  border-left:5px solid #1b5e20;
+  border-radius:8px;
+
+  font-size:18px;
+  font-weight:bold;
 }
 
 
@@ -203,17 +159,14 @@ body{
 
 label{
   display:block;
-
-  font-weight:bold;
-
   margin-bottom:6px;
-
   font-size:16px;
+  font-weight:bold;
 }
 
 
 /* =========================================
-   INPUTS
+   INPUT / SELECT / TEXTAREA
 ========================================= */
 
 input,
@@ -221,9 +174,8 @@ select,
 textarea,
 button{
   width:100%;
-
+  font-family:inherit;
   font-size:16px;
-
   border-radius:10px;
 }
 
@@ -231,12 +183,9 @@ button{
 input,
 select,
 textarea{
-  border:1px solid #bdbdbd;
-
   padding:12px;
-
-  background:#ffffff;
-
+  border:1px solid #bdbdbd;
+  background:#fff;
   color:#222;
 }
 
@@ -245,35 +194,38 @@ input:focus,
 select:focus,
 textarea:focus{
   outline:none;
-
   border-color:#1b5e20;
-
   box-shadow:0 0 0 3px rgba(27,94,32,.12);
 }
 
 
 textarea{
-  min-height:90px;
-
+  min-height:100px;
   resize:vertical;
 }
 
 
+input[type="file"]{
+  padding:10px;
+  cursor:pointer;
+}
+
+
+select{
+  cursor:pointer;
+}
+
+
 /* =========================================
-   BUTTONS
+   BUTTON
 ========================================= */
 
 button{
-  padding:14px;
-
-  border:none;
-
-  cursor:pointer;
-
-  font-weight:bold;
-
   margin-top:15px;
-
+  padding:14px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
   transition:.2s;
 }
 
@@ -283,13 +235,19 @@ button:active{
 }
 
 
-/* GPS BUTTON */
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+
+/* =========================================
+   GPS BUTTON
+========================================= */
 
 .secondary-btn{
   background:#455a64;
-
-  color:#ffffff;
-
+  color:#fff;
   font-size:17px;
 }
 
@@ -299,13 +257,13 @@ button:active{
 }
 
 
-/* SUBMIT BUTTON */
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
 
 .submit-btn{
   background:#1b5e20;
-
-  color:#ffffff;
-
+  color:#fff;
   font-size:18px;
 }
 
@@ -315,55 +273,52 @@ button:active{
 }
 
 
-button:disabled{
-  opacity:.6;
-
-  cursor:not-allowed;
-}
-
-
 /* =========================================
    GPS BOX
 ========================================= */
 
 .gps-box{
-  margin-top:20px;
-
+  margin-top:10px;
   padding:15px;
 
   background:#e8f5e9;
 
   border-left:5px solid #1b5e20;
-
   border-radius:10px;
 
   line-height:1.8;
-
   font-size:16px;
+}
+
+
+.gps-status{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+}
+
+
+.gps-details{
+  margin-top:8px;
 }
 
 
 .gps-success{
   background:#e8f5e9;
-
   border-left-color:#1b5e20;
 }
 
 
 .gps-error{
   background:#ffebee;
-
   border-left-color:#c62828;
-
   color:#b71c1c;
 }
 
 
 .gps-loading{
   background:#fff8e1;
-
   border-left-color:#f9a825;
-
   color:#795548;
 }
 
@@ -372,11 +327,23 @@ button:disabled{
    PHOTO
 ========================================= */
 
+.photo-note{
+  display:block;
+  margin-top:7px;
+  color:#666;
+  font-size:14px;
+}
+
+
+.preview-container{
+  width:100%;
+}
+
+
 #preview{
   display:none;
 
   width:100%;
-
   max-height:500px;
 
   object-fit:cover;
@@ -384,73 +351,50 @@ button:disabled{
   margin-top:15px;
 
   border-radius:10px;
-
   border:1px solid #ddd;
 }
 
 
-/* PHOTO NOTE */
-
-.photo-note{
-  display:block;
-
-  margin-top:7px;
-
-  color:#666;
-
-  font-size:14px;
-}
-
-
 /* =========================================
-   AI BOX
+   AI RESULT
 ========================================= */
 
 .ai-box{
   margin-top:18px;
-
   padding:15px;
 
   background:#f3f6ff;
 
+  border-left:5px solid #3949ab;
   border-radius:10px;
 
-  border-left:5px solid #3949ab;
-
   line-height:1.8;
-
   font-size:16px;
 }
 
 
 .ai-title{
+  margin-bottom:7px;
   font-weight:bold;
-
-  margin-bottom:6px;
-
   color:#283593;
 }
 
 
 .ai-success{
   background:#e8f5e9;
-
   border-left-color:#1b5e20;
 }
 
 
 .ai-warning{
   background:#fff8e1;
-
   border-left-color:#f9a825;
 }
 
 
 .ai-error{
   background:#ffebee;
-
   border-left-color:#c62828;
-
   color:#b71c1c;
 }
 
@@ -460,38 +404,30 @@ button:disabled{
 ========================================= */
 
 #msg{
-  margin-top:18px;
+  display:none;
 
+  margin-top:18px;
   padding:12px;
 
   border-radius:10px;
-
   line-height:1.7;
 
   font-weight:bold;
-
-  display:none;
 }
 
 
 .success{
   display:block !important;
-
   background:#e8f5e9;
-
   color:#1b5e20;
-
   border-left:5px solid #1b5e20;
 }
 
 
 .error{
   display:block !important;
-
   background:#ffebee;
-
   color:#b71c1c;
-
   border-left:5px solid #c62828;
 }
 
@@ -503,14 +439,12 @@ button:disabled{
 .report-box{
   display:none;
 
-  margin-top:22px;
-
+  margin-top:25px;
   padding:20px;
 
-  background:#ffffff;
+  background:#fff;
 
   border:2px solid #1b5e20;
-
   border-radius:12px;
 
   line-height:1.8;
@@ -519,32 +453,175 @@ button:disabled{
 }
 
 
-.report-box h3{
-  margin:0 0 15px;
+/* Report heading */
+
+.report-title{
+  margin-bottom:15px;
+  padding-bottom:10px;
 
   text-align:center;
 
   color:#1b5e20;
 
-  font-size:21px;
+  font-size:22px;
+  font-weight:bold;
 
   border-bottom:2px solid #1b5e20;
-
-  padding-bottom:10px;
 }
 
 
-.report-box p{
-  margin:8px 0;
+/* Report status */
+
+#reportStatus{
+  padding:12px;
+
+  background:#f7faf7;
+
+  border-radius:8px;
+
+  color:#333;
 }
 
 
-.report-box hr{
-  border:none;
+/* =========================================
+   REPORT BUTTON
+========================================= */
 
-  border-top:1px solid #ddd;
+.report-btn{
+  background:#1565c0;
+  color:#fff;
+  font-size:17px;
+}
 
-  margin:15px 0;
+
+.report-btn:hover{
+  background:#0d47a1;
+}
+
+
+/* =========================================
+   GENERATED REPORT
+========================================= */
+
+.generated-report{
+  margin-top:20px;
+  padding:20px;
+
+  background:#fff;
+
+  border:1px solid #999;
+  border-radius:8px;
+}
+
+
+.generated-report h2,
+.generated-report h3{
+  margin:0 0 15px;
+  text-align:center;
+}
+
+
+.generated-report h2{
+  font-size:21px;
+  color:#1b5e20;
+}
+
+
+.generated-report h3{
+  font-size:18px;
+}
+
+
+.report-editable{
+  min-height:300px;
+  padding:15px;
+
+  border:1px dashed #999;
+  border-radius:8px;
+
+  background:#fffdf7;
+
+  outline:none;
+}
+
+
+.report-editable:focus{
+  border-color:#1b5e20;
+  box-shadow:0 0 0 3px rgba(27,94,32,.10);
+}
+
+
+/* =========================================
+   REPORT TABLE
+========================================= */
+
+.report-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+
+.report-table th,
+.report-table td{
+  padding:9px;
+  border:1px solid #bbb;
+  text-align:left;
+}
+
+
+.report-table th{
+  width:42%;
+  background:#f1f5f1;
+}
+
+
+/* =========================================
+   REPORT ACTION BUTTONS
+========================================= */
+
+.report-actions{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+
+.report-actions button{
+  flex:1;
+}
+
+
+.edit-btn{
+  background:#ef6c00;
+  color:#fff;
+}
+
+
+.edit-btn:hover{
+  background:#e65100;
+}
+
+
+.print-btn{
+  background:#1565c0;
+  color:#fff;
+}
+
+
+.print-btn:hover{
+  background:#0d47a1;
+}
+
+
+.save-report-btn{
+  background:#1b5e20;
+  color:#fff;
+}
+
+
+.save-report-btn:hover{
+  background:#134517;
 }
 
 
@@ -554,47 +631,24 @@ button:disabled{
 
 .report-success{
   background:#e8f5e9;
-
   border-color:#1b5e20;
 }
 
 
 .report-warning{
   background:#fff8e1;
-
   border-color:#f9a825;
 }
 
 
 .report-error{
   background:#ffebee;
-
   border-color:#c62828;
 }
 
 
 /* =========================================
-   FILE INPUT
-========================================= */
-
-input[type="file"]{
-  padding:10px;
-
-  cursor:pointer;
-}
-
-
-/* =========================================
-   SELECT
-========================================= */
-
-select{
-  cursor:pointer;
-}
-
-
-/* =========================================
-   LOADING ANIMATION
+   LOADING
 ========================================= */
 
 .loading{
@@ -620,30 +674,11 @@ select{
 
 
 /* =========================================
-   PRINT BUTTON
-========================================= */
-
-.print-btn{
-  background:#1565c0;
-
-  color:#ffffff;
-
-  font-size:17px;
-}
-
-
-.print-btn:hover{
-  background:#0d47a1;
-}
-
-
-/* =========================================
    FOOTER
 ========================================= */
 
 .footer{
   margin-top:25px;
-
   padding-top:15px;
 
   border-top:1px solid #ddd;
@@ -651,18 +686,18 @@ select{
   text-align:center;
 
   color:#555;
-
-  line-height:1.6;
+  line-height:1.7;
 }
 
 
 .footer small{
+  display:block;
   color:#777;
 }
 
 
 /* =========================================
-   MOBILE RESPONSIVE
+   MOBILE
 ========================================= */
 
 @media(max-width:600px){
@@ -672,122 +707,32 @@ select{
   }
 
 
-  .container{
-    width:100%;
-  }
-
-
   .card{
     padding:15px;
-
     border-radius:14px;
   }
 
 
   .government-header{
-    gap:6px;
+    grid-template-columns:52px minmax(0,1fr) 52px;
+    gap:4px;
   }
 
 
   .logo-box{
-    width:55px;
-
-    min-width:55px;
+    width:52px;
+    height:52px;
   }
 
 
   .gov-logo{
     width:48px;
-
     height:48px;
   }
 
 
   .header-title h1{
-    font-size:22px;
-
-    line-height:1.3;
-  }
-
-
-  .header-title p{
-    font-size:14px;
-
-    margin-top:4px;
-  }
-
-
-  .header-title small{
-    font-size:13px;
-
-    margin-top:3px;
-  }
-
-
-  label{
-    font-size:17px;
-  }
-
-
-  input,
-  select,
-  textarea,
-  button{
-    font-size:16px;
-  }
-
-
-  .gps-box,
-  .ai-box{
-    font-size:16px;
-  }
-
-
-  .report-box{
-    padding:15px;
-  }
-
-
-  .report-box h3{
-    font-size:19px;
-  }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media(max-width:380px){
-
-  .card{
-    padding:12px;
-  }
-
-
-  .government-header{
-    gap:3px;
-  }
-
-
-  .logo-box{
-    width:45px;
-
-    min-width:45px;
-  }
-
-
-  .gov-logo{
-    width:40px;
-
-    height:40px;
-  }
-
-
-  .header-title h1{
-    font-size:18px;
-
+    font-size:20px;
     line-height:1.25;
   }
 
@@ -801,6 +746,97 @@ select{
     font-size:11px;
   }
 
+
+  .section-title{
+    font-size:17px;
+  }
+
+
+  label{
+    font-size:16px;
+  }
+
+
+  input,
+  select,
+  textarea,
+  button{
+    font-size:16px;
+  }
+
+
+  .gps-box,
+  .ai-box{
+    font-size:15px;
+  }
+
+
+  .report-box{
+    padding:14px;
+  }
+
+
+  .report-title{
+    font-size:19px;
+  }
+
+
+  .report-actions{
+    flex-direction:column;
+    gap:0;
+  }
+
+
+  .generated-report{
+    padding:12px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:380px){
+
+  .card{
+    padding:10px;
+  }
+
+
+  .government-header{
+    grid-template-columns:42px minmax(0,1fr) 42px;
+    gap:2px;
+  }
+
+
+  .logo-box{
+    width:42px;
+    height:42px;
+  }
+
+
+  .gov-logo{
+    width:38px;
+    height:38px;
+  }
+
+
+  .header-title h1{
+    font-size:17px;
+  }
+
+
+  .header-title p{
+    font-size:10px;
+  }
+
+
+  .header-title small{
+    font-size:10px;
+  }
+
 }
 
 
@@ -811,47 +847,75 @@ select{
 @media print{
 
   body{
-    background:#ffffff;
-
+    background:#fff;
     padding:0;
   }
 
 
   .container{
+    width:100%;
     max-width:100%;
   }
 
 
   .card{
-    box-shadow:none;
-
-    border-radius:0;
-
     padding:15px;
+    box-shadow:none;
+    border-radius:0;
   }
 
 
+  /* Form hide */
+
+  .section-title,
   .form-group,
   .gps-box,
   .secondary-btn,
   .submit-btn,
   .ai-box,
   #preview,
+  .preview-container,
   #msg,
-  .print-btn,
-  .footer{
+  .footer,
+  #reportStatus,
+  .report-btn,
+  .report-actions{
     display:none !important;
   }
 
 
+  /* Report only */
+
   .report-box{
     display:block !important;
 
+    margin-top:15px;
+
+    padding:0;
+
+    border:none;
+
     box-shadow:none;
+  }
 
-    border:1px solid #000;
 
-    margin-top:20px;
+  .generated-report{
+    display:block !important;
+
+    padding:0;
+
+    border:none;
+
+    box-shadow:none;
+  }
+
+
+  .report-editable{
+    padding:0;
+
+    border:none;
+
+    background:#fff;
   }
 
 }
