@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="mr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ज्वारी पीक पडताळणी</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="box"><h2>🌾 ज्वारी पीक पडताळणी</h2><p class="sub">GPS + फोटो + Custom AI + Google Sheet</p>
+<label>शेतकऱ्याचे नाव *</label><input id="farmer">
+<label>गाव *</label><select id="village"><option value="">-- गाव निवडा --</option><option>कोळविहीर</option><option>आष्टोली</option><option>डोमक</option><option>यादवपूर</option></select>
+<label>गट / सर्वे नंबर *</label><input id="survey" placeholder="उदा. 46/1/अ">
+<label>क्षेत्र</label><input id="area" placeholder="उदा. 2.71">
+<label>मोबाईल नंबर</label><input id="mobile" type="tel" inputmode="numeric" maxlength="10">
+<label>ई-पीक पाहणीतील नोंद *</label><select id="eCrop"><option value="">-- निवडा --</option><option>ज्वारी</option><option>इतर</option></select>
+<label>प्रत्यक्ष पाहणीतील स्थिती *</label><select id="actualStatus"><option value="">-- निवडा --</option><option>ज्वारीचे पीक प्रत्यक्ष आहे</option><option>ज्वारीचे पीक प्रत्यक्ष नाही</option><option>काढणी झालेले/अवशेष उपलब्ध</option><option>पुढील चौकशी आवश्यक</option></select>
+<label>स्थानिक शेतकऱ्यांचे बयान</label><select id="localStatement"><option>होय</option><option>नाही</option></select>
+<label>खत / बियाणे पावती पाहिली</label><select id="receiptChecked"><option>होय</option><option>नाही</option></select>
+<label>पडताळणी अधिकाऱ्याचे नाव</label><input id="officer"><label>शेरा</label><textarea id="remark"></textarea>
+<div id="gps">📍 GPS मिळवत आहे...</div><button class="secondary" id="gpsBtn" type="button">📍 GPS पुन्हा मिळवा</button>
+<label>📷 प्रत्यक्ष फोटो *</label><input id="photo" type="file" accept="image/*" capture="environment"><img id="preview">
+<div id="aiBox" class="ai hidden"><b>🤖 AI Crop Analysis</b><div id="aiResult">फोटो Submit झाल्यावर Custom AI पडताळणी होईल.</div></div>
+<button id="submitBtn" type="button">✅ Submit करा</button><p id="msg"></p></div><script src="app.js"></script></body></html>
