@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="mr">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#1b5e20">
 
 <title>ज्वारी पीक पडताळणी प्रणाली</title>
 
@@ -11,57 +16,139 @@
 
 </head>
 
+
 <body>
 
 <div class="container">
 
 <div class="card">
 
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <div class="header">
-<h1>🌾 ज्वारी पीक पडताळणी</h1>
-<p>Crop Verification System</p>
+
+    <div class="government-header">
+
+
+        <!-- महसूल विभाग लोगो -->
+
+        <div class="logo-box">
+
+            <img
+            src="assets/revenue-logo.png"
+            alt="महसूल विभाग लोगो"
+            class="gov-logo">
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <div class="header-title">
+
+            <h1>
+                🌾 ज्वारी पीक पडताळणी
+            </h1>
+
+            <p>
+                Crop Verification System
+            </p>
+
+            <small>
+                ग्राम महसूल अधिकारी कार्यालय
+            </small>
+
+        </div>
+
+
+        <!-- महाराष्ट्र शासन लोगो -->
+
+        <div class="logo-box">
+
+            <img
+            src="assets/maharashtra-logo.png"
+            alt="महाराष्ट्र शासन लोगो"
+            class="gov-logo">
+
+        </div>
+
+
+    </div>
+
 </div>
 
 
-<!-- शेतकरी -->
+
+<!-- =========================================
+     शेतकरी नाव
+========================================= -->
 
 <div class="form-group">
 
-<label>शेतकऱ्याचे पूर्ण नाव *</label>
+<label>
+शेतकऱ्याचे पूर्ण नाव *
+</label>
 
 <input
 id="farmer"
 type="text"
+autocomplete="name"
 placeholder="शेतकऱ्याचे पूर्ण नाव लिहा">
 
 </div>
 
 
-<!-- गाव -->
+
+<!-- =========================================
+     गाव
+========================================= -->
 
 <div class="form-group">
 
-<label>गाव *</label>
+<label>
+गाव *
+</label>
 
 <select id="village">
 
-<option value="">-- गाव निवडा --</option>
+<option value="">
+-- गाव निवडा --
+</option>
 
-<option value="कोळविहीर">कोळविहीर</option>
-<option value="आष्टोली">आष्टोली</option>
-<option value="डोमक">डोमक</option>
-<option value="यादवपूर">यादवपूर</option>
+<option value="कोळविहीर">
+कोळविहीर
+</option>
+
+<option value="आष्टोली">
+आष्टोली
+</option>
+
+<option value="डोमक">
+डोमक
+</option>
+
+<option value="यादवपूर">
+यादवपूर
+</option>
 
 </select>
 
 </div>
 
 
-<!-- सर्वे नंबर -->
+
+<!-- =========================================
+     सर्वे नंबर
+========================================= -->
 
 <div class="form-group">
 
-<label>गट / सर्वे नंबर *</label>
+<label>
+गट / सर्वे नंबर *
+</label>
 
 <input
 id="survey"
@@ -71,64 +158,93 @@ placeholder="उदा. 46/1/अ">
 </div>
 
 
-<!-- क्षेत्र -->
+
+<!-- =========================================
+     क्षेत्र
+========================================= -->
 
 <div class="form-group">
 
-<label>क्षेत्र (हे.आर.)</label>
+<label>
+क्षेत्र (हे.आर.)
+</label>
 
 <input
 id="area"
 type="text"
+inputmode="decimal"
 placeholder="उदा. 2.50">
 
 </div>
 
 
-<!-- मोबाईल -->
+
+<!-- =========================================
+     मोबाईल नंबर
+========================================= -->
 
 <div class="form-group">
 
-<label>मोबाईल नंबर</label>
+<label>
+मोबाईल नंबर
+</label>
 
 <input
 id="mobile"
 type="tel"
 inputmode="numeric"
 maxlength="10"
-placeholder="मोबाईल नंबर">
+placeholder="उदा. 9876543210">
 
 </div>
 
 
-<!-- ई पीक -->
+
+<!-- =========================================
+     ई-पीक
+========================================= -->
 
 <div class="form-group">
 
-<label>ई-पीक पाहणीतील नोंद *</label>
+<label>
+ई-पीक पाहणीतील नोंद *
+</label>
 
 <select id="eCrop">
 
-<option value="">-- निवडा --</option>
+<option value="">
+-- निवडा --
+</option>
 
-<option value="ज्वारी">ज्वारी</option>
+<option value="ज्वारी">
+ज्वारी
+</option>
 
-<option value="इतर">इतर</option>
+<option value="इतर">
+इतर
+</option>
 
 </select>
 
 </div>
 
 
-<!-- प्रत्यक्ष स्थिती -->
+
+<!-- =========================================
+     प्रत्यक्ष स्थिती
+========================================= -->
 
 <div class="form-group">
 
-<label>प्रत्यक्ष पाहणीतील स्थिती *</label>
+<label>
+प्रत्यक्ष पाहणीतील स्थिती *
+</label>
 
 <select id="actualStatus">
 
-<option value="">-- निवडा --</option>
+<option value="">
+-- निवडा --
+</option>
 
 <option value="ज्वारीचे पीक प्रत्यक्ष आहे">
 ज्वारीचे पीक प्रत्यक्ष आहे
@@ -151,45 +267,68 @@ placeholder="मोबाईल नंबर">
 </div>
 
 
-<!-- स्थानिक बयान -->
+
+<!-- =========================================
+     स्थानिक शेतकरी बयान
+========================================= -->
 
 <div class="form-group">
 
-<label>स्थानिक शेतकऱ्यांचे बयान</label>
+<label>
+स्थानिक शेतकऱ्यांचे बयान
+</label>
 
 <select id="localStatement">
 
-<option value="होय">होय</option>
+<option value="होय">
+होय
+</option>
 
-<option value="नाही">नाही</option>
+<option value="नाही">
+नाही
+</option>
 
 </select>
 
 </div>
 
 
-<!-- पावती -->
+
+<!-- =========================================
+     पावती
+========================================= -->
 
 <div class="form-group">
 
-<label>खत / बियाणे पावती पाहिली</label>
+<label>
+खत / बियाणे पावती पाहिली
+</label>
 
 <select id="receiptChecked">
 
-<option value="होय">होय</option>
+<option value="होय">
+होय
+</option>
 
-<option value="नाही">नाही</option>
+<option value="नाही">
+नाही
+</option>
 
 </select>
 
 </div>
 
 
-<!-- अधिकारी -->
+
+<!-- =========================================
+     पडताळणी अधिकारी
+========================================= -->
 
 <div class="form-group">
 
-<label>पडताळणी अधिकाऱ्याचे नाव</label>
+<label>
+पडताळणी अधिकाऱ्याचे नाव
+</label>
 
 <input
 id="officer"
@@ -199,26 +338,60 @@ placeholder="अधिकाऱ्याचे नाव">
 </div>
 
 
-<!-- शेरा -->
+
+<!-- =========================================
+     शेरा
+========================================= -->
 
 <div class="form-group">
 
-<label>शेरा</label>
+<label>
+शेरा
+</label>
 
 <textarea
 id="remark"
-placeholder="आवश्यक असल्यास शेरा लिहा"></textarea>
+placeholder="आवश्यक असल्यास शेरा लिहा">
+</textarea>
 
 </div>
 
 
-<!-- GPS -->
 
-<div class="gps-box" id="gps">
+<!-- =========================================
+     GPS
+========================================= -->
 
-📍 GPS Location मिळवत आहे...
+<div
+class="gps-box"
+id="gps">
+
+<div class="gps-status">
+
+<span class="gps-icon">
+📍
+</span>
+
+<span id="gpsText">
+
+GPS Location मिळवत आहे...
+
+</span>
 
 </div>
+
+
+<div
+id="gpsDetails"
+class="gps-details">
+
+कृपया Location / GPS ON ठेवा.
+
+</div>
+
+</div>
+
+
 
 <button
 type="button"
@@ -230,11 +403,16 @@ id="gpsBtn">
 </button>
 
 
-<!-- फोटो -->
+
+<!-- =========================================
+     फोटो
+========================================= -->
 
 <div class="form-group">
 
-<label>📷 प्रत्यक्ष फोटो *</label>
+<label>
+📷 प्रत्यक्ष फोटो *
+</label>
 
 <input
 id="photo"
@@ -242,22 +420,51 @@ type="file"
 accept="image/*"
 capture="environment">
 
-</div>
+<small class="photo-note">
 
+प्रत्यक्ष शेतातील फोटो कॅमेराद्वारे घ्या.
 
-<img id="preview" alt="फोटो Preview">
-
-
-<!-- AI RESULT -->
-
-<div id="aiResult" class="ai-box">
-
-🤖 AI पडताळणी: फोटो Submit केल्यानंतर निकाल दिसेल.
+</small>
 
 </div>
 
 
-<!-- SUBMIT -->
+
+<!-- फोटो Preview -->
+
+<img
+id="preview"
+alt="फोटो Preview">
+
+
+
+<!-- =========================================
+     AI RESULT
+========================================= -->
+
+<div
+id="aiResult"
+class="ai-box">
+
+<div class="ai-title">
+
+🤖 AI पडताळणी
+
+</div>
+
+<div id="aiText">
+
+फोटो Submit केल्यानंतर AI पडताळणीचा निकाल दिसेल.
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+     SUBMIT
+========================================= -->
 
 <button
 type="button"
@@ -269,7 +476,30 @@ class="submit-btn">
 </button>
 
 
+
+<!-- MESSAGE -->
+
 <div id="msg"></div>
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<div>
+
+🌾 ज्वारी पीक पडताळणी प्रणाली
+
+</div>
+
+<small>
+
+GPS आधारित प्रत्यक्ष पडताळणी
+
+</small>
+
+</div>
 
 
 </div>
@@ -280,4 +510,5 @@ class="submit-btn">
 <script src="app.js"></script>
 
 </body>
+
 </html>
