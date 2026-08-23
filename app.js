@@ -13,6 +13,7 @@ const URL =
 let lat = '';
 let lng = '';
 let accuracy = '';
+let gpsTimestamp = '';
 let gpsWatchId = null;
 
 const g = id => document.getElementById(id);
@@ -36,13 +37,54 @@ function showMessage(message, type = '') {
    AI RESULT FUNCTION
 ========================================= */
 
-function showAI(message) {
+function showAI(message, type = '') {
 
   const box = g('aiResult');
 
-  if (box) {
-    box.innerHTML = message;
+  if (!box) return;
+
+  box.className = 'ai-box';
+
+  if (type === 'success') {
+    box.classList.add('ai-success');
   }
+
+  if (type === 'warning') {
+    box.classList.add('ai-warning');
+  }
+
+  if (type === 'error') {
+    box.classList.add('ai-error');
+  }
+
+  box.innerHTML = message;
+
+}
+
+
+/* =========================================
+   GPS STATUS
+========================================= */
+
+function setGPSStatus(message, type = '') {
+
+  const gps = g('gps');
+
+  gps.className = 'gps-box';
+
+  if (type === 'success') {
+    gps.classList.add('gps-success');
+  }
+
+  if (type === 'error') {
+    gps.classList.add('gps-error');
+  }
+
+  if (type === 'loading') {
+    gps.classList.add('gps-loading');
+  }
+
+  gps.innerHTML = message;
 
 }
 
@@ -60,8 +102,9 @@ function gpsError(error) {
     case error.PERMISSION_DENIED:
 
       message =
-        '❌ GPS Permission बंद आहे.<br><br>' +
-        'Browser Settings मध्ये जाऊन Location ला Allow करा.';
+        '❌ <b>GPS Permission बंद आहे.</b><br><br>' +
+        'Browser Settings मध्ये Location ला Allow करा.<br><br>' +
+        'Chrome → Site Settings → Location → Allow';
 
       break;
 
@@ -69,8 +112,9 @@ function gpsError(error) {
     case error.POSITION_UNAVAILABLE:
 
       message =
-        '❌ GPS Location उपलब्ध नाही.<br><br>' +
-        'मोबाईलची Location सेवा चालू आहे का तपासा.';
+        '❌ <b>GPS Location उपलब्ध नाही.</b><br><br>' +
+        'मोबाईलची Location सेवा ON आहे का तपासा.<br>' +
+        'शक्य असल्यास मोकळ्या जागेत जा.';
 
       break;
 
@@ -78,7 +122,7 @@ function gpsError(error) {
     case error.TIMEOUT:
 
       message =
-        '❌ GPS मिळण्यासाठी जास्त वेळ लागला.<br><br>' +
+        '❌ <b>GPS मिळण्यासाठी जास्त वेळ लागला.</b><br><br>' +
         'मोकळ्या जागेत जाऊन पुन्हा प्रयत्न करा.';
 
       break;
@@ -92,13 +136,7 @@ function gpsError(error) {
 
   }
 
-
-  g('gps').innerHTML = message;
-
-  showMessage(
-    '⚠️ Submit करण्यापूर्वी GPS मिळवणे आवश्यक आहे.',
-    'error'
-  );
+  setGPSStatus(message, 'error');
 
 }
 
@@ -113,36 +151,41 @@ function saveGPS(position) {
   lng = position.coords.longitude;
   accuracy = position.coords.accuracy;
 
+  gpsTimestamp = new Date().toISOString();
+
 
   let accuracyStatus = '';
 
   if (accuracy <= 20) {
 
     accuracyStatus =
-      '🟢 अतिशय अचूक GPS';
+      '🟢 <b>अतिशय अचूक GPS</b>';
 
   }
+
   else if (accuracy <= 50) {
 
     accuracyStatus =
-      '🟡 GPS Accuracy चांगली आहे';
+      '🟢 <b>GPS Accuracy चांगली आहे</b>';
 
   }
+
   else if (accuracy <= 100) {
 
     accuracyStatus =
-      '🟠 GPS Accuracy कमी आहे';
+      '🟡 <b>GPS Accuracy मध्यम आहे</b>';
 
   }
+
   else {
 
     accuracyStatus =
-      '🔴 GPS Accuracy खूप कमी आहे. कृपया पुन्हा GPS मिळवा.';
+      '🟠 <b>GPS Accuracy कमी आहे. शक्य असल्यास पुन्हा GPS मिळवा.</b>';
 
   }
 
 
-  g('gps').innerHTML =
+  setGPSStatus(
 
     '✅ <b>GPS Location मिळाले</b><br><br>' +
 
@@ -160,14 +203,17 @@ function saveGPS(position) {
     Math.round(accuracy) +
     ' मीटर' +
 
+    '<br>' +
+
+    '🕒 वेळ: ' +
+    getDateTime() +
+
     '<br><br>' +
 
-    accuracyStatus;
+    accuracyStatus,
 
-
-  showMessage(
-    '📍 GPS यशस्वीरित्या मिळाले आहे.',
     'success'
+
   );
 
 }
@@ -179,19 +225,26 @@ function saveGPS(position) {
 
 function getGPS() {
 
-  g('gps').innerHTML =
+  setGPSStatus(
 
     '⏳ <b>GPS Location मिळवत आहे...</b><br><br>' +
 
     'कृपया थोडा वेळ थांबा.<br>' +
 
-    'मोबाईलची Location ON ठेवा.';
+    '📱 मोबाईलची Location ON ठेवा.<br>' +
+    '🌐 Browser Permission Allow असणे आवश्यक आहे.',
+
+    'loading'
+
+  );
 
 
   if (!navigator.geolocation) {
 
-    g('gps').innerHTML =
-      '❌ या Browser मध्ये GPS उपलब्ध नाही.';
+    setGPSStatus(
+      '❌ या Browser मध्ये GPS उपलब्ध नाही.',
+      'error'
+    );
 
     return;
 
@@ -226,13 +279,9 @@ function getGPS() {
     },
 
     {
-
       enableHighAccuracy: true,
-
-      timeout: 45000,
-
+      timeout: 60000,
       maximumAge: 0
-
     }
 
   );
@@ -240,32 +289,27 @@ function getGPS() {
 
   /* GPS सतत अपडेट करण्यासाठी */
 
-  gpsWatchId =
-    navigator.geolocation.watchPosition(
+  gpsWatchId = navigator.geolocation.watchPosition(
 
-      function(position) {
+    function(position) {
 
-        saveGPS(position);
+      saveGPS(position);
 
-      },
+    },
 
-      function(error) {
+    function(error) {
 
-        console.log('GPS Watch Error:', error);
+      console.log('GPS Watch Error:', error);
 
-      },
+    },
 
-      {
+    {
+      enableHighAccuracy: true,
+      maximumAge: 0,
+      timeout: 60000
+    }
 
-        enableHighAccuracy: true,
-
-        maximumAge: 0,
-
-        timeout: 60000
-
-      }
-
-    );
+  );
 
 }
 
@@ -276,7 +320,11 @@ function getGPS() {
 
 g('gpsBtn').addEventListener(
   'click',
-  getGPS
+  function() {
+
+    getGPS();
+
+  }
 );
 
 
@@ -301,6 +349,33 @@ window.addEventListener(
 
 
 /* =========================================
+   DATE TIME
+========================================= */
+
+function getDateTime() {
+
+  return new Date().toLocaleString(
+
+    'en-GB',
+
+    {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+
+      hour12: false
+    }
+
+  );
+
+}
+
+
+/* =========================================
    PHOTO PREVIEW
 ========================================= */
 
@@ -310,18 +385,13 @@ g('photo').addEventListener(
 
   function() {
 
-    const file =
-      g('photo').files[0];
+    const file = g('photo').files[0];
 
 
     if (!file) {
-
       return;
-
     }
 
-
-    /* Image आहे का तपासा */
 
     if (!file.type.startsWith('image/')) {
 
@@ -337,25 +407,22 @@ g('photo').addEventListener(
     }
 
 
-    const reader =
-      new FileReader();
+    const reader = new FileReader();
 
 
-    reader.onload =
-      function(e) {
+    reader.onload = function(e) {
 
-        g('preview').src =
-          e.target.result;
+      g('preview').src = e.target.result;
 
-        g('preview').style.display =
-          'block';
+      g('preview').style.display = 'block';
 
 
-        showAI(
-          '🤖 AI पडताळणी: फोटो तयार आहे. माहिती Submit केल्यानंतर AI पडताळणी केली जाईल.'
-        );
+      showAI(
+        '🤖 AI पडताळणीसाठी फोटो तयार आहे.<br>' +
+        'माहिती Submit केल्यानंतर फोटो प्रक्रिया केली जाईल.'
+      );
 
-      };
+    };
 
 
     reader.readAsDataURL(file);
@@ -375,45 +442,9 @@ function safeName(text) {
 
     .trim()
 
-    .replace(
-      /[\\/:*?"<>|]/g,
-      '_'
-    )
+    .replace(/[\\/:*?"<>|]/g, '_')
 
-    .replace(
-      /\s+/g,
-      '_'
-    );
-
-}
-
-
-/* =========================================
-   DATE TIME
-========================================= */
-
-function getDateTime() {
-
-  return new Date()
-    .toLocaleString(
-
-      'en-GB',
-
-      {
-
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-
-        hour12: false
-
-      }
-
-    );
+    .replace(/\s+/g, '_');
 
 }
 
@@ -428,240 +459,176 @@ function stamped(file) {
 
     function(resolve, reject) {
 
-      const reader =
-        new FileReader();
+      const reader = new FileReader();
 
 
-      reader.onload =
-        function(e) {
+      reader.onload = function(e) {
 
-          const img =
-            new Image();
+        const img = new Image();
 
 
-          img.onload =
-            function() {
+        img.onload = function() {
 
-              let width =
-                img.width;
-
-              let height =
-                img.height;
+          let width = img.width;
+          let height = img.height;
 
 
-              const MAX_WIDTH =
-                1600;
+          const MAX_WIDTH = 1600;
 
 
-              if (
-                width > MAX_WIDTH
-              ) {
+          if (width > MAX_WIDTH) {
 
-                height =
-                  Math.round(
-                    height *
-                    MAX_WIDTH /
-                    width
-                  );
+            height = Math.round(
+              height * MAX_WIDTH / width
+            );
 
-                width =
-                  MAX_WIDTH;
+            width = MAX_WIDTH;
 
-              }
+          }
 
 
-              const fontSize =
-                Math.max(
-                  18,
-                  Math.round(
-                    width / 42
-                  )
-                );
+          const fontSize = Math.max(
+            20,
+            Math.round(width / 42)
+          );
 
 
-              const lineHeight =
-                Math.round(
-                  fontSize * 1.45
-                );
+          const lineHeight = Math.round(
+            fontSize * 1.5
+          );
 
 
-              const padding =
-                Math.round(
-                  fontSize * 0.8
-                );
+          const padding = Math.round(
+            fontSize * 0.8
+          );
 
 
-              const infoHeight =
-
-                lineHeight * 5 +
-
-                padding * 2;
+          const infoHeight =
+            lineHeight * 5 +
+            padding * 2;
 
 
-              const canvas =
-                document.createElement(
-                  'canvas'
-                );
+          const canvas =
+            document.createElement('canvas');
 
 
-              canvas.width =
-                width;
+          canvas.width = width;
+
+          canvas.height =
+            height + infoHeight;
 
 
-              canvas.height =
-                height +
-                infoHeight;
+          const ctx =
+            canvas.getContext('2d');
 
 
-              const ctx =
-                canvas.getContext(
-                  '2d'
-                );
+          /* मूळ फोटो */
+
+          ctx.drawImage(
+            img,
+            0,
+            0,
+            width,
+            height
+          );
 
 
-              /* मूळ फोटो */
+          /* खाली काळी माहिती पट्टी */
 
-              ctx.drawImage(
+          ctx.fillStyle =
+            'rgba(0,0,0,0.82)';
 
-                img,
 
-                0,
-                0,
+          ctx.fillRect(
+            0,
+            height,
+            width,
+            infoHeight
+          );
 
-                width,
-                height
 
+          ctx.fillStyle =
+            '#ffffff';
+
+
+          ctx.font =
+            'bold ' +
+            fontSize +
+            'px Arial, sans-serif';
+
+
+          const lines = [
+
+            'शेतकरी: ' +
+            g('farmer').value.trim(),
+
+
+            'गाव: ' +
+            g('village').value +
+            ' | सर्वे नं.: ' +
+            g('survey').value.trim(),
+
+
+            'GPS: ' +
+            Number(lat).toFixed(6) +
+            ', ' +
+            Number(lng).toFixed(6),
+
+
+            'Accuracy: ' +
+            Math.round(accuracy) +
+            ' meters',
+
+
+            'दिनांक व वेळ: ' +
+            getDateTime()
+
+          ];
+
+
+          let y =
+            height +
+            padding +
+            fontSize;
+
+
+          lines.forEach(
+
+            function(line) {
+
+              ctx.fillText(
+                line,
+                padding,
+                y
               );
 
+              y += lineHeight;
 
-              /* खाली माहिती पट्टी */
+            }
 
-              ctx.fillStyle =
-                'rgba(0,0,0,0.80)';
-
-
-              ctx.fillRect(
-
-                0,
-                height,
-
-                width,
-                infoHeight
-
-              );
+          );
 
 
-              ctx.fillStyle =
-                '#ffffff';
+          resolve(
 
+            canvas.toDataURL(
+              'image/jpeg',
+              0.85
+            )
 
-              ctx.font =
-
-                'bold ' +
-
-                fontSize +
-
-                'px Arial';
-
-
-              let y =
-
-                height +
-
-                padding +
-
-                fontSize;
-
-
-              const lines = [
-
-                'शेतकरी: ' +
-                g('farmer').value.trim(),
-
-
-                'गाव: ' +
-                g('village').value +
-
-                ' | सर्वे नं.: ' +
-                g('survey').value.trim(),
-
-
-                'GPS: ' +
-
-                Number(lat)
-                  .toFixed(6) +
-
-                ', ' +
-
-                Number(lng)
-                  .toFixed(6),
-
-
-                'Accuracy: ' +
-
-                Math.round(accuracy) +
-
-                ' meters',
-
-
-                'दिनांक व वेळ: ' +
-
-                getDateTime()
-
-              ];
-
-
-              lines.forEach(
-
-                function(line) {
-
-                  ctx.fillText(
-
-                    line,
-
-                    padding,
-
-                    y
-
-                  );
-
-
-                  y +=
-                    lineHeight;
-
-                }
-
-              );
-
-
-              resolve(
-
-                canvas.toDataURL(
-
-                  'image/jpeg',
-
-                  0.85
-
-                )
-
-              );
-
-            };
-
-
-          img.onerror =
-            reject;
-
-
-          img.src =
-            e.target.result;
+          );
 
         };
 
 
-      reader.onerror =
-        reject;
+        img.onerror = reject;
 
+        img.src = e.target.result;
+
+      };
+
+
+      reader.onerror = reject;
 
       reader.readAsDataURL(file);
 
@@ -679,20 +646,40 @@ function stamped(file) {
 function validateMobile() {
 
   const mobile =
-    g('mobile')
-      .value
-      .trim();
+    g('mobile').value.trim();
 
 
   if (!mobile) {
-
     return true;
+  }
+
+
+  return /^[0-9]{10}$/.test(mobile);
+
+}
+
+
+/* =========================================
+   VALIDATE GPS
+========================================= */
+
+function validateGPS() {
+
+  if (!lat || !lng) {
+
+    return {
+      valid: false,
+      warning: ''
+    };
 
   }
 
 
-  return /^[0-9]{10}$/
-    .test(mobile);
+  return {
+    valid: true,
+    warning:
+      Number(accuracy) > 100
+  };
 
 }
 
@@ -711,134 +698,70 @@ g('submitBtn').addEventListener(
     const need = [];
 
 
-    if (
-      !g('farmer')
-        .value
-        .trim()
-    ) {
-
-      need.push(
-        'शेतकऱ्याचे नाव'
-      );
-
+    if (!g('farmer').value.trim()) {
+      need.push('शेतकऱ्याचे नाव');
     }
 
 
-    if (
-      !g('village').value
-    ) {
-
-      need.push(
-        'गाव'
-      );
-
+    if (!g('village').value) {
+      need.push('गाव');
     }
 
 
-    if (
-      !g('survey')
-        .value
-        .trim()
-    ) {
-
-      need.push(
-        'गट / सर्वे नंबर'
-      );
-
+    if (!g('survey').value.trim()) {
+      need.push('गट / सर्वे नंबर');
     }
 
 
-    if (
-      !g('eCrop').value
-    ) {
-
-      need.push(
-        'ई-पीक नोंद'
-      );
-
+    if (!g('eCrop').value) {
+      need.push('ई-पीक नोंद');
     }
 
 
-    if (
-      !g('actualStatus')
-        .value
-    ) {
-
-      need.push(
-        'प्रत्यक्ष पाहणीतील स्थिती'
-      );
-
+    if (!g('actualStatus').value) {
+      need.push('प्रत्यक्ष पाहणीतील स्थिती');
     }
 
 
-    if (
-      !g('photo')
-        .files[0]
-    ) {
-
-      need.push(
-        'प्रत्यक्ष फोटो'
-      );
-
+    if (!g('photo').files[0]) {
+      need.push('प्रत्यक्ष फोटो');
     }
 
 
-    if (
-      !lat ||
-      !lng
-    ) {
+    const gpsCheck =
+      validateGPS();
 
-      need.push(
-        'GPS Location'
-      );
 
+    if (!gpsCheck.valid) {
+      need.push('GPS Location');
     }
 
 
-    if (
-      !validateMobile()
-    ) {
-
-      need.push(
-        'योग्य 10 अंकी मोबाईल नंबर'
-      );
-
+    if (!validateMobile()) {
+      need.push('योग्य 10 अंकी मोबाईल नंबर');
     }
 
 
-    if (
-      URL.includes(
-        'PASTE_YOUR'
-      )
-    ) {
-
-      need.push(
-        'Web App URL'
-      );
-
+    if (!URL || URL.includes('PASTE_YOUR')) {
+      need.push('Google Apps Script Web App URL');
     }
 
 
     /* आवश्यक माहिती */
 
-    if (
-      need.length
-    ) {
+    if (need.length > 0) {
 
       showMessage(
 
         '⚠️ खालील माहिती आवश्यक आहे:<br><br>' +
 
         need
-          .map(
-            x => '❌ ' + x
-          )
+          .map(x => '❌ ' + x)
           .join('<br>'),
 
         'error'
 
       );
-
 
       return;
 
@@ -847,32 +770,25 @@ g('submitBtn').addEventListener(
 
     /* GPS Accuracy Warning */
 
-    if (
-      Number(accuracy) > 100
-    ) {
+    if (gpsCheck.warning) {
 
-      const confirmSubmit =
-        confirm(
+      const confirmSubmit = confirm(
 
-          'GPS Accuracy ' +
+        '⚠️ GPS Accuracy ' +
 
-          Math.round(accuracy) +
+        Math.round(accuracy) +
 
-          ' मीटर आहे.\n\n' +
+        ' मीटर आहे.\n\n' +
 
-          'GPS पुन्हा मिळवणे योग्य राहील.\n\n' +
+        'GPS पुन्हा मिळवणे योग्य राहील.\n\n' +
 
-          'तरीही Submit करायचे आहे का?'
+        'तरीही Submit करायचे आहे का?'
 
-        );
+      );
 
 
-      if (
-        !confirmSubmit
-      ) {
-
+      if (!confirmSubmit) {
         return;
-
       }
 
     }
@@ -882,27 +798,19 @@ g('submitBtn').addEventListener(
       g('submitBtn');
 
 
-    button.disabled =
-      true;
-
+    button.disabled = true;
 
     button.innerHTML =
       '⏳ माहिती साठवत आहे...';
 
 
     showMessage(
-
       '⏳ GPS माहिती आणि फोटो प्रक्रिया सुरू आहे...'
-
     );
 
 
     showAI(
-
-      '🤖 AI पडताळणी सुरू आहे...<br>' +
-
-      'कृपया प्रतीक्षा करा.'
-
+      '🤖 पडताळणीसाठी फोटो आणि माहिती पाठवली जात आहे...'
     );
 
 
@@ -910,8 +818,7 @@ g('submitBtn').addEventListener(
 
 
       const file =
-        g('photo')
-          .files[0];
+        g('photo').files[0];
 
 
       /* GPS माहिती असलेला फोटो */
@@ -953,97 +860,57 @@ g('submitBtn').addEventListener(
 
       const data = {
 
-
         farmer:
-          g('farmer')
-            .value
-            .trim(),
-
+          g('farmer').value.trim(),
 
         village:
-          g('village')
-            .value,
-
+          g('village').value,
 
         survey:
-          g('survey')
-            .value
-            .trim(),
-
+          g('survey').value.trim(),
 
         area:
-          g('area')
-            .value
-            .trim(),
-
+          g('area').value.trim(),
 
         mobile:
-          g('mobile')
-            .value
-            .trim(),
-
+          g('mobile').value.trim(),
 
         eCrop:
-          g('eCrop')
-            .value,
-
+          g('eCrop').value,
 
         actualStatus:
-          g('actualStatus')
-            .value,
-
+          g('actualStatus').value,
 
         localStatement:
-          g('localStatement')
-            .value,
-
+          g('localStatement').value,
 
         receiptChecked:
-          g('receiptChecked')
-            .value,
-
+          g('receiptChecked').value,
 
         officer:
-          g('officer')
-            .value
-            .trim(),
-
+          g('officer').value.trim(),
 
         remark:
-          g('remark')
-            .value
-            .trim(),
+          g('remark').value.trim(),
 
+        lat: lat,
 
-        lat:
-          lat,
+        lng: lng,
 
+        accuracy: accuracy,
 
-        lng:
-          lng,
-
-
-        accuracy:
-          accuracy,
-
+        gpsTimestamp: gpsTimestamp,
 
         capturedAt:
-          new Date()
-            .toISOString(),
+          new Date().toISOString(),
 
-
-        fileName:
-          fileName,
-
+        fileName: fileName,
 
         mimeType:
           'image/jpeg',
 
-
         imageBase64:
-
-          imageData
-            .split(',')[1]
+          imageData.split(',')[1]
 
       };
 
@@ -1056,11 +923,9 @@ g('submitBtn').addEventListener(
 
         {
 
-          method:
-            'POST',
+          method: 'POST',
 
-          mode:
-            'no-cors',
+          mode: 'no-cors',
 
           headers: {
 
@@ -1081,11 +946,15 @@ g('submitBtn').addEventListener(
 
       showMessage(
 
-        '✅ माहिती यशस्वीरित्या साठविण्यात आली!<br><br>' +
+        '✅ <b>माहिती यशस्वीरित्या साठविण्यात आली!</b><br><br>' +
 
         '📍 GPS Location सेव्ह करण्यात आली.<br>' +
 
-        '📷 फोटो Google Drive मध्ये सेव्ह करण्यात आला.',
+        '📷 फोटो Google Drive मध्ये पाठवण्यात आला.<br>' +
+
+        '🎯 GPS Accuracy: ' +
+        Math.round(accuracy) +
+        ' मीटर',
 
         'success'
 
@@ -1094,11 +963,25 @@ g('submitBtn').addEventListener(
 
       showAI(
 
-        '🤖 AI पडताळणी: माहिती Server कडे पाठविण्यात आली आहे.<br>' +
+        '🤖 माहिती आणि फोटो पडताळणीसाठी पाठवण्यात आला आहे.<br>' +
+        'निकाल Google Sheet मध्ये उपलब्ध होईल.',
 
-        'AI निकाल Google Sheet मध्ये उपलब्ध होईल.'
+        'success'
 
       );
+
+
+      /* GPS Watch बंद करा */
+
+      if (gpsWatchId !== null) {
+
+        navigator.geolocation.clearWatch(
+          gpsWatchId
+        );
+
+        gpsWatchId = null;
+
+      }
 
 
       /* FORM RESET */
@@ -1111,27 +994,23 @@ g('submitBtn').addEventListener(
 
         },
 
-        2500
+        3000
 
       );
-
 
     }
 
 
     catch (error) {
 
-
-      console.error(
-        error
-      );
+      console.error(error);
 
 
       showMessage(
 
         '❌ माहिती साठविताना त्रुटी आली.<br><br>' +
 
-        'कृपया इंटरनेट तपासा आणि पुन्हा प्रयत्न करा.',
+        'कृपया इंटरनेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.',
 
         'error'
 
@@ -1140,7 +1019,9 @@ g('submitBtn').addEventListener(
 
       showAI(
 
-        '❌ AI पडताळणी पूर्ण झाली नाही. कृपया पुन्हा प्रयत्न करा.'
+        '❌ पडताळणी पूर्ण झाली नाही. कृपया पुन्हा प्रयत्न करा.',
+
+        'error'
 
       );
 
@@ -1149,16 +1030,12 @@ g('submitBtn').addEventListener(
 
     finally {
 
-
-      button.disabled =
-        false;
-
+      button.disabled = false;
 
       button.innerHTML =
         '✅ माहिती Submit करा';
 
     }
-
 
   }
 
@@ -1171,80 +1048,63 @@ g('submitBtn').addEventListener(
 
 function resetForm() {
 
+  g('farmer').value = '';
 
-  g('farmer').value =
-    '';
+  g('village').value = '';
 
+  g('survey').value = '';
 
-  g('village').value =
-    '';
+  g('area').value = '';
 
+  g('mobile').value = '';
 
-  g('survey').value =
-    '';
+  g('eCrop').value = '';
 
+  g('actualStatus').value = '';
 
-  g('area').value =
-    '';
+  g('localStatement').value = 'होय';
 
+  g('receiptChecked').value = 'होय';
 
-  g('mobile').value =
-    '';
+  g('officer').value = '';
 
+  g('remark').value = '';
 
-  g('eCrop').value =
-    '';
+  g('photo').value = '';
 
+  g('preview').src = '';
 
-  g('actualStatus').value =
-    '';
-
-
-  g('localStatement').value =
-    'होय';
-
-
-  g('receiptChecked').value =
-    'होय';
-
-
-  g('officer').value =
-    '';
-
-
-  g('remark').value =
-    '';
-
-
-  g('photo').value =
-    '';
-
-
-  g('preview').src =
-    '';
-
-
-  g('preview').style.display =
-    'none';
+  g('preview').style.display = 'none';
 
 
   showAI(
-
     '🤖 AI पडताळणी: फोटो Submit केल्यानंतर निकाल दिसेल.'
-
   );
 
 
-  /* नवीन GPS */
+  showMessage('', '');
+
+
+  /* नवीन GPS साठी जुनी माहिती काढा */
 
   lat = '';
+
   lng = '';
+
   accuracy = '';
 
+  gpsTimestamp = '';
+
+
+  /* नवीन GPS मिळवा */
 
   setTimeout(
 
-    getGPS,
+    function() {
+
+      getGPS();
+
+    },
 
     1000
 
