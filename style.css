@@ -859,7 +859,126 @@ input[type="file"]{
   background:#263238;
 }
 
+/* =========================================
+   REPORT ACTIONS
+========================================= */
 
+.report-title{
+  text-align:center;
+  font-size:21px;
+  font-weight:bold;
+  color:#1b5e20;
+  margin-bottom:18px;
+  border-bottom:2px solid #1b5e20;
+  padding-bottom:10px;
+}
+
+.report-preview{
+  line-height:1.8;
+  font-size:16px;
+}
+
+.report-editor{
+  width:100%;
+  min-height:600px;
+  padding:15px;
+  border:1px solid #1b5e20;
+  border-radius:10px;
+  font-family:"Nirmala UI", Arial, sans-serif;
+  font-size:16px;
+  line-height:1.8;
+  resize:vertical;
+}
+
+.report-actions{
+  margin-top:20px;
+}
+
+.report-actions button{
+  margin-top:10px;
+}
+
+.report-btn{
+  background:#1b5e20;
+  color:#fff;
+}
+
+.edit-btn{
+  background:#f57c00;
+  color:#fff;
+}
+
+.save-btn{
+  background:#2e7d32;
+  color:#fff;
+}
+
+.official-report{
+  background:#fff;
+}
+
+.official-report h2{
+  text-align:center;
+  color:#1b5e20;
+  margin:0;
+}
+
+.official-report h3{
+  color:#1b5e20;
+  font-size:18px;
+}
+
+.report-header{
+  text-align:center;
+}
+
+.report-header p{
+  margin:5px 0 15px;
+}
+
+.report-result{
+  padding:15px;
+  border:1px solid #1b5e20;
+  border-radius:8px;
+  font-size:17px;
+}
+
+.signature-area{
+  display:flex;
+  justify-content:space-between;
+  text-align:center;
+  margin-top:40px;
+}
+
+@media print{
+
+  .report-actions,
+  #submitBtn,
+  #gpsBtn,
+  .secondary-btn,
+  .form-group,
+  .gps-box,
+  .ai-box,
+  #msg,
+  .footer{
+    display:none !important;
+  }
+
+  #reportBox{
+    display:block !important;
+    border:none !important;
+    box-shadow:none !important;
+  }
+
+  #reportPreview{
+    display:block !important;
+  }
+
+  #reportEditor{
+    display:none !important;
+  }
+
+}
 /* MOBILE */
 
 @media(max-width:600px){
