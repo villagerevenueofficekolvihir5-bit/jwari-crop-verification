@@ -60,7 +60,9 @@ body{
 }
 
 
-/* Logo Box */
+/* =========================================
+   LOGO BOX
+========================================= */
 
 .logo-box{
   width:75px;
@@ -72,7 +74,9 @@ body{
 }
 
 
-/* Government Logos */
+/* =========================================
+   GOVERNMENT LOGOS
+========================================= */
 
 .gov-logo{
   width:65px;
@@ -83,7 +87,9 @@ body{
 }
 
 
-/* Center Title */
+/* =========================================
+   CENTER TITLE
+========================================= */
 
 .header-title{
   flex:1;
@@ -91,7 +97,9 @@ body{
 }
 
 
-/* Main Title */
+/* =========================================
+   MAIN TITLE
+========================================= */
 
 .header-title h1{
   margin:0;
@@ -102,7 +110,9 @@ body{
 }
 
 
-/* English Subtitle */
+/* =========================================
+   ENGLISH SUBTITLE
+========================================= */
 
 .header-title p{
   margin:6px 0 0;
@@ -152,8 +162,6 @@ textarea{
 }
 
 
-/* Focus */
-
 input:focus,
 select:focus,
 textarea:focus{
@@ -183,7 +191,10 @@ button{
 }
 
 
-/* GPS Button */
+button:active{
+  transform:scale(.99);
+}
+
 
 .secondary-btn{
   background:#455a64;
@@ -195,8 +206,6 @@ button{
   background:#37474f;
 }
 
-
-/* Submit Button */
 
 .submit-btn{
   background:#1b5e20;
@@ -235,15 +244,11 @@ button:disabled{
 }
 
 
-/* GPS Success */
-
 .gps-success{
   background:#e8f5e9;
   border-left-color:#1b5e20;
 }
 
-
-/* GPS Error */
 
 .gps-error{
   background:#ffebee;
@@ -252,11 +257,10 @@ button:disabled{
 }
 
 
-/* GPS Loading */
-
 .gps-loading{
   background:#fff8e1;
   border-left-color:#f9a825;
+  color:#795548;
 }
 
 
@@ -266,17 +270,11 @@ button:disabled{
 
 #preview{
   display:none;
-
   width:100%;
-
   max-height:500px;
-
   object-fit:cover;
-
   margin-top:15px;
-
   border-radius:10px;
-
   border:1px solid #ddd;
 }
 
@@ -301,15 +299,11 @@ button:disabled{
 }
 
 
-/* AI Confirmed */
-
 .ai-success{
   background:#e8f5e9;
   border-left-color:#1b5e20;
 }
 
-
-/* AI Warning */
 
 .ai-warning{
   background:#fff8e1;
@@ -317,11 +311,10 @@ button:disabled{
 }
 
 
-/* AI Error */
-
 .ai-error{
   background:#ffebee;
   border-left-color:#c62828;
+  color:#b71c1c;
 }
 
 
@@ -366,12 +359,134 @@ button:disabled{
 
 
 /* =========================================
+   REPORT BOX
+========================================= */
+
+.report-box{
+  display:none;
+
+  margin-top:22px;
+  padding:20px;
+
+  background:#ffffff;
+
+  border:2px solid #1b5e20;
+
+  border-radius:12px;
+
+  line-height:1.8;
+
+  box-shadow:0 3px 15px rgba(0,0,0,.10);
+}
+
+
+.report-box h3{
+  margin:0 0 15px;
+
+  text-align:center;
+
+  color:#1b5e20;
+
+  font-size:21px;
+
+  border-bottom:2px solid #1b5e20;
+
+  padding-bottom:10px;
+}
+
+
+.report-box p{
+  margin:8px 0;
+}
+
+
+.report-box hr{
+  border:none;
+  border-top:1px solid #ddd;
+  margin:15px 0;
+}
+
+
+/* =========================================
+   REPORT RESULT COLORS
+========================================= */
+
+.report-success{
+  background:#e8f5e9;
+  border-color:#1b5e20;
+}
+
+
+.report-warning{
+  background:#fff8e1;
+  border-color:#f9a825;
+}
+
+
+.report-error{
+  background:#ffebee;
+  border-color:#c62828;
+}
+
+
+/* =========================================
    FILE INPUT
 ========================================= */
 
 input[type="file"]{
   padding:10px;
   cursor:pointer;
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+select{
+  cursor:pointer;
+}
+
+
+/* =========================================
+   LOADING ANIMATION
+========================================= */
+
+.loading{
+  animation:pulse 1.2s infinite;
+}
+
+
+@keyframes pulse{
+
+  0%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.6;
+  }
+
+  100%{
+    opacity:1;
+  }
+
+}
+
+
+/* =========================================
+   PRINT BUTTON
+========================================= */
+
+.print-btn{
+  background:#1565c0;
+  color:#ffffff;
+  font-size:17px;
+}
+
+
+.print-btn:hover{
+  background:#0d47a1;
 }
 
 
@@ -383,6 +498,11 @@ input[type="file"]{
 
   body{
     padding:8px;
+  }
+
+
+  .container{
+    width:100%;
   }
 
 
@@ -439,6 +559,16 @@ input[type="file"]{
     font-size:16px;
   }
 
+
+  .report-box{
+    padding:15px;
+  }
+
+
+  .report-box h3{
+    font-size:19px;
+  }
+
 }
 
 
@@ -447,6 +577,11 @@ input[type="file"]{
 ========================================= */
 
 @media(max-width:380px){
+
+  .card{
+    padding:12px;
+  }
+
 
   .logo-box{
     width:42px;
@@ -467,6 +602,52 @@ input[type="file"]{
 
   .header-title p{
     font-size:12px;
+  }
+
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+@media print{
+
+  body{
+    background:#ffffff;
+    padding:0;
+  }
+
+
+  .container{
+    max-width:100%;
+  }
+
+
+  .card{
+    box-shadow:none;
+    border-radius:0;
+    padding:15px;
+  }
+
+
+  .form-group,
+  .gps-box,
+  .secondary-btn,
+  .submit-btn,
+  .ai-box,
+  #preview,
+  #msg,
+  .print-btn{
+    display:none !important;
+  }
+
+
+  .report-box{
+    display:block !important;
+    box-shadow:none;
+    border:1px solid #000;
+    margin-top:20px;
   }
 
 }
