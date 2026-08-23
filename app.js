@@ -27,6 +27,8 @@ function showMessage(message, type = '') {
 
   const msg = g('msg');
 
+  if (!msg) return;
+
   msg.className = type;
   msg.innerHTML = message;
 
@@ -69,6 +71,8 @@ function showAI(message, type = '') {
 function setGPSStatus(message, type = '') {
 
   const gps = g('gps');
+
+  if (!gps) return;
 
   gps.className = 'gps-box';
 
@@ -262,7 +266,7 @@ function getGPS() {
   }
 
 
-  /* प्रथम Current Position */
+  /* Current Position */
 
   navigator.geolocation.getCurrentPosition(
 
@@ -287,7 +291,7 @@ function getGPS() {
   );
 
 
-  /* GPS सतत अपडेट करण्यासाठी */
+  /* GPS सतत अपडेट */
 
   gpsWatchId = navigator.geolocation.watchPosition(
 
@@ -320,11 +324,7 @@ function getGPS() {
 
 g('gpsBtn').addEventListener(
   'click',
-  function() {
-
-    getGPS();
-
-  }
+  getGPS
 );
 
 
@@ -533,7 +533,7 @@ function stamped(file) {
           );
 
 
-          /* खाली काळी माहिती पट्टी */
+          /* खाली माहिती पट्टी */
 
           ctx.fillStyle =
             'rgba(0,0,0,0.82)';
@@ -562,23 +562,19 @@ function stamped(file) {
             'शेतकरी: ' +
             g('farmer').value.trim(),
 
-
             'गाव: ' +
             g('village').value +
             ' | सर्वे नं.: ' +
             g('survey').value.trim(),
-
 
             'GPS: ' +
             Number(lat).toFixed(6) +
             ', ' +
             Number(lng).toFixed(6),
 
-
             'Accuracy: ' +
             Math.round(accuracy) +
             ' meters',
-
 
             'दिनांक व वेळ: ' +
             getDateTime()
@@ -669,7 +665,7 @@ function validateGPS() {
 
     return {
       valid: false,
-      warning: ''
+      warning: false
     };
 
   }
@@ -677,9 +673,213 @@ function validateGPS() {
 
   return {
     valid: true,
-    warning:
-      Number(accuracy) > 100
+    warning: Number(accuracy) > 100
   };
+
+}
+
+
+/* =========================================
+   SHOW VERIFICATION REPORT
+========================================= */
+
+function showReport() {
+
+  const reportBox =
+    g('reportBox');
+
+  const reportContent =
+    g('reportContent');
+
+
+  if (!reportBox || !reportContent) {
+
+    console.error(
+      'Report Box HTML मध्ये उपलब्ध नाही.'
+    );
+
+    return;
+
+  }
+
+
+  const farmer =
+    g('farmer').value.trim();
+
+  const village =
+    g('village').value;
+
+  const survey =
+    g('survey').value.trim();
+
+  const area =
+    g('area').value.trim();
+
+  const mobile =
+    g('mobile').value.trim();
+
+  const eCrop =
+    g('eCrop').value;
+
+  const actualStatus =
+    g('actualStatus').value;
+
+  const localStatement =
+    g('localStatement').value;
+
+  const receiptChecked =
+    g('receiptChecked').value;
+
+  const officer =
+    g('officer').value.trim();
+
+  const remark =
+    g('remark').value.trim();
+
+
+  let resultClass =
+    'report-success';
+
+  let resultText =
+    '✅ प्रत्यक्ष पाहणीमध्ये ज्वारीचे पीक आढळून आले आहे.';
+
+
+  if (
+    actualStatus ===
+    'ज्वारीचे पीक प्रत्यक्ष नाही'
+  ) {
+
+    resultClass =
+      'report-error';
+
+    resultText =
+      '❌ प्रत्यक्ष पाहणीमध्ये ज्वारीचे पीक आढळून आले नाही.';
+
+  }
+
+
+  else if (
+
+    actualStatus ===
+    'काढणी झालेले / अवशेष उपलब्ध'
+
+    ||
+
+    actualStatus ===
+    'पुढील चौकशी आवश्यक'
+
+  ) {
+
+    resultClass =
+      'report-warning';
+
+    resultText =
+      '⚠️ सदर प्रकरणात पुढील चौकशी / पडताळणी आवश्यक आहे.';
+
+  }
+
+
+  reportBox.className =
+    'report-box ' +
+    resultClass;
+
+
+  reportContent.innerHTML =
+
+    '<p><b>शेतकऱ्याचे पूर्ण नाव:</b> ' +
+    farmer +
+    '</p>' +
+
+    '<p><b>गाव:</b> ' +
+    village +
+    '</p>' +
+
+    '<p><b>गट / सर्वे नंबर:</b> ' +
+    survey +
+    '</p>' +
+
+    '<p><b>क्षेत्र:</b> ' +
+    (area || '-') +
+    ' हे.आर.</p>' +
+
+    '<p><b>मोबाईल नंबर:</b> ' +
+    (mobile || '-') +
+    '</p>' +
+
+    '<hr>' +
+
+    '<p><b>ई-पीक पाहणीतील नोंद:</b> ' +
+    eCrop +
+    '</p>' +
+
+    '<p><b>प्रत्यक्ष पाहणीतील स्थिती:</b> ' +
+    actualStatus +
+    '</p>' +
+
+    '<p><b>स्थानिक शेतकऱ्यांचे बयान:</b> ' +
+    localStatement +
+    '</p>' +
+
+    '<p><b>खत / बियाणे पावती पाहिली:</b> ' +
+    receiptChecked +
+    '</p>' +
+
+    '<hr>' +
+
+    '<p><b>📍 Latitude:</b> ' +
+    Number(lat).toFixed(6) +
+    '</p>' +
+
+    '<p><b>📍 Longitude:</b> ' +
+    Number(lng).toFixed(6) +
+    '</p>' +
+
+    '<p><b>🎯 GPS Accuracy:</b> ' +
+    Math.round(accuracy) +
+    ' मीटर</p>' +
+
+    '<p><b>🕒 पडताळणी दिनांक व वेळ:</b> ' +
+    getDateTime() +
+    '</p>' +
+
+    '<hr>' +
+
+    '<p><b>पडताळणी अधिकाऱ्याचे नाव:</b> ' +
+    (officer || '-') +
+    '</p>' +
+
+    '<p><b>शेरा:</b> ' +
+    (remark || '-') +
+    '</p>' +
+
+    '<hr>' +
+
+    '<p><b>पडताळणीचा निकाल:</b><br>' +
+    resultText +
+    '</p>';
+
+
+  reportBox.style.display =
+    'block';
+
+
+  setTimeout(
+
+    function() {
+
+      reportBox.scrollIntoView({
+
+        behavior: 'smooth',
+
+        block: 'start'
+
+      });
+
+    },
+
+    300
+
+  );
 
 }
 
@@ -693,7 +893,6 @@ g('submitBtn').addEventListener(
   'click',
 
   async function() {
-
 
     const need = [];
 
@@ -746,8 +945,6 @@ g('submitBtn').addEventListener(
       need.push('Google Apps Script Web App URL');
     }
 
-
-    /* आवश्यक माहिती */
 
     if (need.length > 0) {
 
@@ -815,7 +1012,6 @@ g('submitBtn').addEventListener(
 
 
     try {
-
 
       const file =
         g('photo').files[0];
@@ -942,7 +1138,7 @@ g('submitBtn').addEventListener(
       );
 
 
-      /* SUCCESS */
+      /* SUCCESS MESSAGE */
 
       showMessage(
 
@@ -964,11 +1160,18 @@ g('submitBtn').addEventListener(
       showAI(
 
         '🤖 माहिती आणि फोटो पडताळणीसाठी पाठवण्यात आला आहे.<br>' +
-        'निकाल Google Sheet मध्ये उपलब्ध होईल.',
+        'पडताळणी अहवाल खाली तयार करण्यात आला आहे.',
 
         'success'
 
       );
+
+
+      /* =====================================
+         SHOW REPORT
+      ===================================== */
+
+      showReport();
 
 
       /* GPS Watch बंद करा */
@@ -984,19 +1187,13 @@ g('submitBtn').addEventListener(
       }
 
 
-      /* FORM RESET */
+      /*
+        IMPORTANT:
 
-      setTimeout(
+        येथे resetForm() ठेवलेले नाही.
 
-        function() {
-
-          resetForm();
-
-        },
-
-        3000
-
-      );
+        त्यामुळे अहवाल स्क्रीनवर कायम दिसेल.
+      */
 
     }
 
@@ -1043,6 +1240,29 @@ g('submitBtn').addEventListener(
 
 
 /* =========================================
+   PRINT REPORT
+========================================= */
+
+const printBtn = g('printBtn');
+
+if (printBtn) {
+
+  printBtn.addEventListener(
+
+    'click',
+
+    function() {
+
+      window.print();
+
+    }
+
+  );
+
+}
+
+
+/* =========================================
    RESET FORM
 ========================================= */
 
@@ -1085,29 +1305,32 @@ function resetForm() {
   showMessage('', '');
 
 
-  /* नवीन GPS साठी जुनी माहिती काढा */
+  /* Report लपवा */
+
+  const reportBox =
+    g('reportBox');
+
+  if (reportBox) {
+
+    reportBox.style.display =
+      'none';
+
+  }
+
+
+  /* GPS माहिती काढा */
 
   lat = '';
-
   lng = '';
-
   accuracy = '';
-
   gpsTimestamp = '';
 
 
   /* नवीन GPS मिळवा */
 
   setTimeout(
-
-    function() {
-
-      getGPS();
-
-    },
-
+    getGPS,
     1000
-
   );
 
 }
