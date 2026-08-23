@@ -65,8 +65,8 @@ body{
 ========================================= */
 
 .logo-box{
-  width:375px;
-  min-width:375px;
+  width:975px;
+  min-width:975px;
 
   display:flex;
   align-items:center;
@@ -79,8 +79,8 @@ body{
 ========================================= */
 
 .gov-logo{
-  width:365px;
-  height:365px;
+  width:965px;
+  height:965px;
 
   object-fit:contain;
   display:block;
@@ -104,7 +104,7 @@ body{
 .header-title h1{
   margin:0;
   color:#1b5e20;
-  font-size:27px;
+  font-size:227px;
   font-weight:700;
   line-height:1.35;
 }
