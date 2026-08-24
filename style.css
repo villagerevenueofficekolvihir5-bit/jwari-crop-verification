@@ -24,14 +24,14 @@ body{
 ========================================= */
 
 .container{
-  max-width:700px;
   width:100%;
-  margin:auto;
+  max-width:700px;
+  margin:0 auto;
 }
 
 
 /* =========================================
-   CARD
+   MAIN CARD
 ========================================= */
 
 .card{
@@ -48,9 +48,9 @@ body{
 
 .header{
   width:100%;
-  border-bottom:3px solid #1b5e20;
   margin-bottom:20px;
   padding-bottom:14px;
+  border-bottom:3px solid #1b5e20;
 }
 
 .government-header{
@@ -86,34 +86,27 @@ body{
 .header-title{
   min-width:0;
   text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
 }
 
 .header-title h1{
   margin:0;
-  padding:0;
   color:#1b5e20;
   font-size:25px;
   line-height:1.3;
   font-weight:700;
-  text-align:center;
 }
 
 .header-title p{
   margin:4px 0 0;
   color:#666;
   font-size:14px;
-  text-align:center;
 }
 
 .header-title small{
+  display:block;
   margin-top:3px;
   color:#444;
   font-size:13px;
-  text-align:center;
 }
 
 
@@ -123,7 +116,7 @@ body{
 
 .section-title{
   margin-top:24px;
-  padding:10px 12px;
+  padding:11px 13px;
   background:#e8f5e9;
   border-left:5px solid #1b5e20;
   border-radius:8px;
@@ -143,14 +136,14 @@ body{
 
 label{
   display:block;
-  font-weight:bold;
   margin-bottom:6px;
   font-size:16px;
+  font-weight:bold;
 }
 
 
 /* =========================================
-   INPUTS
+   FORM INPUTS
 ========================================= */
 
 input,
@@ -166,8 +159,9 @@ button{
 input,
 select,
 textarea{
-  border:1px solid #bdbdbd;
+  width:100%;
   padding:12px;
+  border:1px solid #bdbdbd;
   background:#ffffff;
   color:#222;
 }
@@ -181,26 +175,26 @@ textarea:focus{
 }
 
 textarea{
-  min-height:90px;
+  min-height:100px;
   resize:vertical;
 }
 
 
 /* =========================================
-   BUTTONS
+   BUTTON COMMON
 ========================================= */
 
 button{
   padding:14px;
+  margin-top:15px;
   border:none;
   cursor:pointer;
   font-weight:bold;
-  margin-top:15px;
-  transition:.2s;
+  transition:all .2s ease;
 }
 
 button:hover{
-  filter:brightness(.97);
+  filter:brightness(.96);
 }
 
 button:active{
@@ -213,7 +207,9 @@ button:disabled{
 }
 
 
-/* GPS BUTTON */
+/* =========================================
+   GPS BUTTON
+========================================= */
 
 .secondary-btn{
   background:#455a64;
@@ -226,12 +222,15 @@ button:disabled{
 }
 
 
-/* SUBMIT BUTTON */
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
 
 .submit-btn{
   background:#1b5e20;
   color:#ffffff;
-  font-size:18px;
+  font-size:19px;
+  padding:16px;
 }
 
 .submit-btn:hover{
@@ -251,20 +250,6 @@ button:disabled{
   border-radius:10px;
   line-height:1.8;
   font-size:16px;
-}
-
-.gps-status{
-  display:flex;
-  align-items:flex-start;
-  gap:8px;
-}
-
-.gps-icon{
-  font-size:20px;
-}
-
-.gps-details{
-  margin-top:8px;
 }
 
 .gps-success{
@@ -299,6 +284,7 @@ input[type="file"]{
   margin-top:7px;
   color:#666;
   font-size:14px;
+  line-height:1.5;
 }
 
 .preview-container{
@@ -317,23 +303,23 @@ input[type="file"]{
 
 
 /* =========================================
-   AI BOX
+   AI RESULT
 ========================================= */
 
 .ai-box{
   margin-top:18px;
   padding:15px;
   background:#f3f6ff;
-  border-radius:10px;
   border-left:5px solid #3949ab;
+  border-radius:10px;
   line-height:1.8;
   font-size:16px;
 }
 
 .ai-title{
-  font-weight:bold;
   margin-bottom:6px;
   color:#283593;
+  font-weight:bold;
 }
 
 .ai-success{
@@ -358,22 +344,22 @@ input[type="file"]{
 ========================================= */
 
 #msg{
+  display:none;
   margin-top:18px;
-  padding:12px;
+  padding:15px;
   border-radius:10px;
   line-height:1.7;
   font-weight:bold;
-  display:none;
 }
 
-.success{
+#msg.success{
   display:block !important;
   background:#e8f5e9;
   color:#1b5e20;
   border-left:5px solid #1b5e20;
 }
 
-.error{
+#msg.error{
   display:block !important;
   background:#ffebee;
   color:#b71c1c;
@@ -391,64 +377,94 @@ input[type="file"]{
   padding:20px;
   background:#ffffff;
   border:2px solid #1b5e20;
-  border-radius:12px;
+  border-radius:14px;
   line-height:1.8;
   box-shadow:0 3px 15px rgba(0,0,0,.10);
 }
+
+
+/* =========================================
+   REPORT TITLE
+========================================= */
 
 .report-title{
   text-align:center;
   color:#1b5e20;
   font-size:22px;
   font-weight:bold;
-  padding-bottom:10px;
-  margin-bottom:15px;
+  padding-bottom:12px;
+  margin-bottom:18px;
   border-bottom:2px solid #1b5e20;
-}
-
-#reportStatus{
-  margin-bottom:15px;
 }
 
 
 /* =========================================
-   GENERATED REPORT
+   REPORT STATUS
 ========================================= */
 
-.report-content{
-  background:#fff;
-  padding:10px 0;
+#reportStatus{
+  display:none;
+  margin-bottom:15px;
+  padding:10px;
+  border-radius:8px;
+  background:#e8f5e9;
+  color:#1b5e20;
+  font-weight:bold;
 }
 
-.report-content h3{
+
+/* =========================================
+   REPORT CONTENT
+========================================= */
+
+#reportContent{
+  background:#ffffff;
+  padding:5px 0;
+  line-height:1.9;
+  font-size:16px;
+}
+
+#reportContent h3{
   margin:0 0 15px;
   text-align:center;
   color:#1b5e20;
   font-size:21px;
 }
 
-.report-content p{
+#reportContent p{
   margin:8px 0;
 }
 
-.report-content hr{
+#reportContent hr{
   border:none;
-  border-top:1px solid #ccc;
-  margin:15px 0;
+  border-top:1px solid #cccccc;
+  margin:16px 0;
 }
 
 
 /* =========================================
-   EDITABLE REPORT
+   REPORT PREVIEW
+   जुन्या HTML compatibility
+========================================= */
+
+.report-preview{
+  line-height:1.8;
+  font-size:16px;
+}
+
+
+/* =========================================
+   REPORT EDITOR
 ========================================= */
 
 .report-editor{
   width:100%;
-  min-height:350px;
+  min-height:500px;
   padding:15px;
-  border:1px solid #aaa;
+  border:1px solid #1b5e20;
   border-radius:10px;
-  background:#fff;
+  background:#ffffff;
+  font-family:"Nirmala UI", Arial, sans-serif;
   font-size:16px;
   line-height:1.8;
   resize:vertical;
@@ -462,57 +478,22 @@ input[type="file"]{
 
 
 /* =========================================
-   REPORT BUTTONS
+   REPORT RESULT COLORS
 ========================================= */
 
-.report-btn{
-  background:#1b5e20;
-  color:#fff;
-  font-size:17px;
+.report-success{
+  background:#ffffff;
+  border-color:#1b5e20;
 }
 
-.report-btn:hover{
-  background:#134517;
+.report-warning{
+  background:#fffdf5;
+  border-color:#f9a825;
 }
 
-.edit-btn{
-  background:#f57c00;
-  color:#fff;
-  font-size:17px;
-}
-
-.edit-btn:hover{
-  background:#e65100;
-}
-
-.save-report-btn{
-  background:#2e7d32;
-  color:#fff;
-  font-size:17px;
-}
-
-.save-report-btn:hover{
-  background:#1b5e20;
-}
-
-.cancel-edit-btn{
-  background:#757575;
-  color:#fff;
-  font-size:17px;
-}
-
-.cancel-edit-btn:hover{
-  background:#616161;
-}
-
-.print-btn{
-  background:#1565c0;
-  color:#ffffff;
-  font-size:17px;
-}
-
-.print-btn:hover{
-  background:#0d47a1;
+.report-error{
+  background:#fffafa;
+  border-color:#c62828;
 }
 
 
@@ -524,60 +505,83 @@ input[type="file"]{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  margin-top:15px;
+  margin-top:20px;
 }
 
 .report-actions button{
-  margin-top:0;
-}
-
-.report-actions .print-btn{
-  grid-column:1 / -1;
+  width:100%;
+  margin:0;
 }
 
 
 /* =========================================
-   REPORT COLORS
+   EDIT BUTTON
 ========================================= */
 
-.report-success{
-  background:#e8f5e9;
-  border-color:#1b5e20;
+.edit-btn{
+  background:#f57c00;
+  color:#ffffff;
 }
 
-.report-warning{
-  background:#fff8e1;
-  border-color:#f9a825;
-}
-
-.report-error{
-  background:#ffebee;
-  border-color:#c62828;
+.edit-btn:hover{
+  background:#e65100;
 }
 
 
 /* =========================================
-   LOADING
+   SAVE BUTTON
 ========================================= */
 
-.loading{
-  animation:pulse 1.2s infinite;
+.save-btn{
+  background:#2e7d32;
+  color:#ffffff;
 }
 
-@keyframes pulse{
+.save-btn:hover{
+  background:#1b5e20;
+}
 
-  0%{
-    opacity:1;
-  }
 
-  50%{
-    opacity:.6;
-  }
+/* =========================================
+   PRINT BUTTON
+========================================= */
 
-  100%{
-    opacity:1;
-  }
+.print-btn{
+  background:#1565c0;
+  color:#ffffff;
+}
 
+.print-btn:hover{
+  background:#0d47a1;
+}
+
+
+/* =========================================
+   NEW ENTRY BUTTON
+========================================= */
+
+.new-btn{
+  background:#455a64;
+  color:#ffffff;
+}
+
+.new-btn:hover{
+  background:#263238;
+}
+
+
+/* =========================================
+   OLD REPORT BUTTON
+   HTML compatibility
+========================================= */
+
+.report-btn{
+  background:#1b5e20;
+  color:#ffffff;
+}
+
+.report-btn:hover{
+  background:#134517;
 }
 
 
@@ -588,7 +592,7 @@ input[type="file"]{
 .footer{
   margin-top:25px;
   padding-top:15px;
-  border-top:1px solid #ddd;
+  border-top:1px solid #dddddd;
   text-align:center;
   color:#555;
   line-height:1.7;
@@ -671,12 +675,12 @@ input[type="file"]{
     font-size:20px;
   }
 
-  .report-actions{
-    grid-template-columns:1fr;
+  #reportContent{
+    font-size:15px;
   }
 
-  .report-actions .print-btn{
-    grid-column:auto;
+  .report-actions{
+    grid-template-columns:1fr;
   }
 
 }
@@ -723,28 +727,31 @@ input[type="file"]{
 
 
 /* =========================================
-   PRINT
+   PRINT SETTINGS
 ========================================= */
 
 @media print{
 
   body{
-    background:#fff;
+    background:#ffffff;
     padding:0;
   }
 
   .container{
     max-width:100%;
+    width:100%;
   }
 
   .card{
+    padding:15px;
     box-shadow:none;
     border-radius:0;
-    padding:15px;
   }
 
-  /* फॉर्म आणि बटणे प्रिंटमध्ये दिसणार नाहीत */
 
+  /* Header आणि form प्रिंटमध्ये लपवा */
+
+  .header,
   .section-title,
   .form-group,
   .gps-box,
@@ -755,247 +762,34 @@ input[type="file"]{
   #msg,
   .footer,
   .report-actions,
-  .report-btn,
-  .edit-btn,
-  .save-report-btn,
-  .cancel-edit-btn,
-  .print-btn{
+  #reportStatus{
     display:none !important;
   }
 
-  .report-box{
-    display:block !important;
-    box-shadow:none;
-    border:1px solid #000;
-    border-radius:0;
-    margin-top:20px;
-    padding:15px;
-  }
 
-  .report-editor{
-    border:none;
-    box-shadow:none;
-    padding:0;
-    resize:none;
-  }
-
-}
-/* =========================================
-   REPORT TITLE
-========================================= */
-
-.report-title{
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  color:#1b5e20;
-  margin-bottom:15px;
-  padding-bottom:10px;
-  border-bottom:2px solid #1b5e20;
-}
-
-
-/* =========================================
-   REPORT STATUS
-========================================= */
-
-#reportStatus{
-  margin-bottom:15px;
-  padding:10px;
-  border-radius:8px;
-  background:#e8f5e9;
-  color:#1b5e20;
-  font-weight:bold;
-}
-
-
-/* =========================================
-   REPORT ACTIONS
-========================================= */
-
-.report-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:20px;
-}
-
-
-/* EDIT BUTTON */
-
-.edit-btn{
-  background:#f9a825;
-  color:#ffffff;
-}
-
-
-/* SAVE BUTTON */
-
-.save-btn{
-  background:#2e7d32;
-  color:#ffffff;
-}
-
-
-/* NEW ENTRY BUTTON */
-
-.new-btn{
-  background:#455a64;
-  color:#ffffff;
-}
-
-
-/* BUTTON HOVER */
-
-.edit-btn:hover{
-  background:#e08a00;
-}
-
-.save-btn:hover{
-  background:#1b5e20;
-}
-
-.new-btn:hover{
-  background:#263238;
-}
-
-/* =========================================
-   REPORT ACTIONS
-========================================= */
-
-.report-title{
-  text-align:center;
-  font-size:21px;
-  font-weight:bold;
-  color:#1b5e20;
-  margin-bottom:18px;
-  border-bottom:2px solid #1b5e20;
-  padding-bottom:10px;
-}
-
-.report-preview{
-  line-height:1.8;
-  font-size:16px;
-}
-
-.report-editor{
-  width:100%;
-  min-height:600px;
-  padding:15px;
-  border:1px solid #1b5e20;
-  border-radius:10px;
-  font-family:"Nirmala UI", Arial, sans-serif;
-  font-size:16px;
-  line-height:1.8;
-  resize:vertical;
-}
-
-.report-actions{
-  margin-top:20px;
-}
-
-.report-actions button{
-  margin-top:10px;
-}
-
-.report-btn{
-  background:#1b5e20;
-  color:#fff;
-}
-
-.edit-btn{
-  background:#f57c00;
-  color:#fff;
-}
-
-.save-btn{
-  background:#2e7d32;
-  color:#fff;
-}
-
-.official-report{
-  background:#fff;
-}
-
-.official-report h2{
-  text-align:center;
-  color:#1b5e20;
-  margin:0;
-}
-
-.official-report h3{
-  color:#1b5e20;
-  font-size:18px;
-}
-
-.report-header{
-  text-align:center;
-}
-
-.report-header p{
-  margin:5px 0 15px;
-}
-
-.report-result{
-  padding:15px;
-  border:1px solid #1b5e20;
-  border-radius:8px;
-  font-size:17px;
-}
-
-.signature-area{
-  display:flex;
-  justify-content:space-between;
-  text-align:center;
-  margin-top:40px;
-}
-
-@media print{
-
-  .report-actions,
-  #submitBtn,
-  #gpsBtn,
-  .secondary-btn,
-  .form-group,
-  .gps-box,
-  .ai-box,
-  #msg,
-  .footer{
-    display:none !important;
-  }
+  /* फक्त Report */
 
   #reportBox{
     display:block !important;
-    border:none !important;
+    margin:0 !important;
+    padding:15px !important;
+    background:#ffffff !important;
+    border:1px solid #000000 !important;
+    border-radius:0 !important;
     box-shadow:none !important;
   }
 
-  #reportPreview{
+  .report-title{
+    color:#000000 !important;
+    border-bottom:2px solid #000000 !important;
+  }
+
+  #reportContent{
     display:block !important;
+    color:#000000 !important;
   }
 
-  #reportEditor{
-    display:none !important;
-  }
-
-}
-/* MOBILE */
-
-@media(max-width:600px){
-
-  .report-actions{
-    grid-template-columns:1fr;
-  }
-
-}
-
-
-/* PRINT */
-
-@media print{
-
-  .report-actions,
-  #reportStatus{
+  .report-editor{
     display:none !important;
   }
 
