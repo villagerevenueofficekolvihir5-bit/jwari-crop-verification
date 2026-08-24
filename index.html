@@ -31,7 +31,9 @@
 <div class="card">
 
 
-<!-- GOVERNMENT HEADER -->
+<!-- =========================================
+     GOVERNMENT HEADER
+========================================= -->
 
 <div class="header">
 
@@ -40,10 +42,9 @@
     <div class="logo-box">
 
       <img
-        src="satymevjayate .png"
+        src="satymevjayate.png"
         alt="भारत सरकार - सत्यमेव जयते"
-        class="gov-logo"
-        id="revenueLogo">
+        class="gov-logo">
 
     </div>
 
@@ -68,10 +69,9 @@
     <div class="logo-box">
 
       <img
-        src="maharashtra shasan .png"
+        src="maharashtra-shasan.png"
         alt="महाराष्ट्र शासन"
-        class="gov-logo"
-        id="maharashtraLogo">
+        class="gov-logo">
 
     </div>
 
@@ -86,9 +86,7 @@
 ========================================= -->
 
 <div class="section-title">
-
 👨‍🌾 शेतकरी माहिती
-
 </div>
 
 
@@ -191,9 +189,7 @@
 ========================================= -->
 
 <div class="section-title">
-
 🌾 पीक पडताळणी माहिती
-
 </div>
 
 
@@ -261,18 +257,14 @@
 ========================================= -->
 
 <div class="section-title">
-
 📝 शेतकऱ्याचे बयान
-
 </div>
 
 
 <div class="form-group">
 
 <label for="localStatement">
-
 शेतकऱ्याचे प्रत्यक्ष बयान
-
 </label>
 
 <textarea
@@ -292,15 +284,13 @@
 <div class="form-group">
 
 <label for="statementFarmer">
-
-बयान देणाऱ्या व्यक्तीचे नाव
-
+बयान देणाऱ्या शेतकऱ्याचे नाव
 </label>
 
 <input
   id="statementFarmer"
   type="text"
-  placeholder="बयान देणाऱ्या व्यक्तीचे पूर्ण नाव">
+  placeholder="शेतकऱ्याचे पूर्ण नाव">
 
 </div>
 
@@ -359,12 +349,12 @@
 
 
 
-<!-- GPS -->
+<!-- =========================================
+     GPS
+========================================= -->
 
 <div class="section-title">
-
 📍 GPS Location
-
 </div>
 
 
@@ -372,28 +362,7 @@
   class="gps-box"
   id="gps">
 
-  <div class="gps-status">
-
-    <span class="gps-icon">
-      📍
-    </span>
-
-    <strong id="gpsText">
-
-      GPS Location मिळवत आहे...
-
-    </strong>
-
-  </div>
-
-
-  <div
-    id="gpsDetails"
-    class="gps-details">
-
-    कृपया मोबाईलची Location / GPS ON ठेवा.
-
-  </div>
+  📍 GPS Location मिळवत आहे...
 
 </div>
 
@@ -409,12 +378,12 @@
 
 
 
-<!-- PHOTO -->
+<!-- =========================================
+     PHOTO
+========================================= -->
 
 <div class="section-title">
-
 📷 प्रत्यक्ष पीक फोटो
-
 </div>
 
 
@@ -449,21 +418,21 @@
 
 
 
-<!-- AI RESULT -->
+<!-- =========================================
+     AI RESULT
+========================================= -->
 
 <div
   id="aiResult"
   class="ai-box">
 
   <div class="ai-title">
-
-    🤖 AI पडताळणी
-
+    🤖 पडताळणी माहिती
   </div>
 
   <div id="aiText">
 
-    फोटो Submit केल्यानंतर AI पडताळणीचा निकाल येथे दिसेल.
+    फोटो Submit केल्यानंतर पडताळणी अहवाल तयार करता येईल.
 
   </div>
 
@@ -471,14 +440,16 @@
 
 
 
-<!-- SUBMIT -->
+<!-- =========================================
+     SUBMIT
+========================================= -->
 
 <button
   type="button"
   id="submitBtn"
   class="submit-btn">
 
-  ✅ माहिती Submit करा
+✅ माहिती Submit करा
 
 </button>
 
@@ -492,7 +463,7 @@
 
 
 <!-- =========================================
-     REPORT SECTION
+     INDIVIDUAL REPORT
 ========================================= -->
 
 <div
@@ -501,9 +472,7 @@
   style="display:none;">
 
 <div class="report-title">
-
 📄 ज्वारी पीक पडताळणी अहवाल
-
 </div>
 
 
@@ -562,7 +531,7 @@
   class="print-btn"
   style="display:none;">
 
-🖨️ Print / PDF
+🖨️ वैयक्तिक अहवाल Print / PDF
 
 </button>
 
@@ -583,7 +552,94 @@
 
 
 
-<!-- FOOTER -->
+<!-- =========================================
+     CONSOLIDATED REPORT
+========================================= -->
+
+<div class="section-title">
+📊 एकत्रित अहवाल
+</div>
+
+
+<div class="form-group">
+
+<label for="reportVillage">
+गावानुसार अहवाल
+</label>
+
+<select id="reportVillage">
+
+<option value="">
+सर्व गावांचा एकत्रित अहवाल
+</option>
+
+<option value="कोळविहीर">
+कोळविहीर
+</option>
+
+<option value="आष्टोली">
+आष्टोली
+</option>
+
+<option value="डोमक">
+डोमक
+</option>
+
+<option value="यादवपूर">
+यादवपूर
+</option>
+
+</select>
+
+</div>
+
+
+<button
+  type="button"
+  id="consolidatedBtn"
+  class="consolidated-btn">
+
+📊 एकत्रित अहवाल तयार करा
+
+</button>
+
+
+
+<div
+  id="consolidatedBox"
+  class="report-box"
+  style="display:none;">
+
+<div class="report-title">
+📊 ज्वारी पीक पडताळणी एकत्रित अहवाल
+</div>
+
+
+<div id="consolidatedContent">
+
+</div>
+
+
+<div class="report-actions">
+
+<button
+  type="button"
+  id="printConsolidatedBtn"
+  class="print-btn">
+
+🖨️ एकत्रित अहवाल Print / PDF
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
 
 <div class="footer">
 
