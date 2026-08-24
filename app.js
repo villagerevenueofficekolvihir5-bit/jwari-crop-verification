@@ -2,8 +2,7 @@
    GOOGLE APPS SCRIPT WEB APP URL
 ========================================= */
 
-const URL =
-'https://script.google.com/macros/s/AKfycbxf-DeTDrNmtqrALOv3MskWyIQZJjJUgKqPCAy5I_L9o8gydxsMdMqbpW-0FH2bSFKH/exec';
+const URL = 'https://script.google.com/macros/s/AKfycbxf-DeTDrNmtqrALOv3MskWyIQZJjJUgKqPCAy5I_L9o8gydxsMdMqbpW-0FH2bSFKH/exec';
 
 
 /* =========================================
@@ -14,7 +13,6 @@ let lat = '';
 let lng = '';
 let accuracy = '';
 let gpsTimestamp = '';
-let gpsWatchId = null;
 
 let reportData = null;
 
@@ -22,7 +20,7 @@ const g = id => document.getElementById(id);
 
 
 /* =========================================
-   MESSAGE FUNCTION
+   MESSAGE
 ========================================= */
 
 function showMessage(message, type = '') {
@@ -32,9 +30,11 @@ function showMessage(message, type = '') {
   if (!msg) return;
 
   if (!message) {
+
     msg.className = '';
     msg.innerHTML = '';
     msg.style.display = 'none';
+
     return;
   }
 
@@ -45,7 +45,7 @@ function showMessage(message, type = '') {
 
 
 /* =========================================
-   AI RESULT FUNCTION
+   AI RESULT
 ========================================= */
 
 function showAI(message, type = '') {
@@ -68,7 +68,10 @@ function showAI(message, type = '') {
     box.classList.add('ai-error');
   }
 
-  box.innerHTML = message;
+  box.innerHTML = `
+    <div class="ai-title">🤖 AI पडताळणी</div>
+    <div>${message}</div>
+  `;
 }
 
 
@@ -112,34 +115,38 @@ function gpsError(error) {
 
     case error.PERMISSION_DENIED:
 
-      message =
-        '❌ <b>GPS Permission बंद आहे.</b><br><br>' +
-        'Browser Settings मध्ये Location ला Allow करा.<br><br>' +
-        'Chrome → Site Settings → Location → Allow';
+      message = `
+        ❌ <b>GPS Permission बंद आहे.</b><br><br>
+        Browser Settings मध्ये Location ला Allow करा.<br><br>
+        Chrome → Site Settings → Location → Allow
+      `;
 
       break;
 
     case error.POSITION_UNAVAILABLE:
 
-      message =
-        '❌ <b>GPS Location उपलब्ध नाही.</b><br><br>' +
-        'मोबाईलची Location सेवा ON आहे का तपासा.';
+      message = `
+        ❌ <b>GPS Location उपलब्ध नाही.</b><br><br>
+        मोबाईलची Location सेवा ON आहे का तपासा.
+      `;
 
       break;
 
     case error.TIMEOUT:
 
-      message =
-        '❌ <b>GPS मिळण्यासाठी जास्त वेळ लागला.</b><br><br>' +
-        'मोकळ्या जागेत जाऊन पुन्हा प्रयत्न करा.';
+      message = `
+        ❌ <b>GPS मिळण्यासाठी जास्त वेळ लागला.</b><br><br>
+        मोकळ्या जागेत जाऊन पुन्हा प्रयत्न करा.
+      `;
 
       break;
 
     default:
 
-      message =
-        '❌ GPS Location मिळाले नाही.<br><br>' +
-        'Location ON करून पुन्हा प्रयत्न करा.';
+      message = `
+        ❌ GPS Location मिळाले नाही.<br><br>
+        Location ON करून पुन्हा प्रयत्न करा.
+      `;
   }
 
   setGPSStatus(message, 'error');
@@ -180,17 +187,26 @@ function saveGPS(position) {
 
   setGPSStatus(
 
-    '✅ <b>GPS Location मिळाले</b><br><br>' +
+    `
+    <div class="gps-status">
+      <span class="gps-icon">📍</span>
+      <strong>GPS Location मिळाले</strong>
+    </div>
 
-    '📍 Latitude: ' + Number(lat).toFixed(6) + '<br>' +
+    <div class="gps-details">
 
-    '📍 Longitude: ' + Number(lng).toFixed(6) + '<br>' +
+      📍 Latitude: ${Number(lat).toFixed(6)}<br>
 
-    '🎯 Accuracy: ' + Math.round(accuracy) + ' मीटर<br>' +
+      📍 Longitude: ${Number(lng).toFixed(6)}<br>
 
-    '🕒 वेळ: ' + getDateTime() + '<br><br>' +
+      🎯 Accuracy: ${Math.round(accuracy)} मीटर<br>
 
-    accuracyStatus,
+      🕒 वेळ: ${getDateTime()}<br><br>
+
+      ${accuracyStatus}
+
+    </div>
+    `,
 
     'success'
   );
@@ -205,9 +221,24 @@ function getGPS() {
 
   setGPSStatus(
 
-    '⏳ <b>GPS Location मिळवत आहे...</b><br><br>' +
-    'कृपया थोडा वेळ थांबा.<br>' +
-    '📱 मोबाईलची Location ON ठेवा.',
+    `
+    <div class="gps-status">
+
+      <span class="gps-icon">⏳</span>
+
+      <strong>
+        GPS Location मिळवत आहे...
+      </strong>
+
+    </div>
+
+    <div class="gps-details">
+
+      कृपया थोडा वेळ थांबा.<br>
+      📱 मोबाईलची Location ON ठेवा.
+
+    </div>
+    `,
 
     'loading'
   );
@@ -220,12 +251,6 @@ function getGPS() {
     );
 
     return;
-  }
-
-  if (gpsWatchId !== null) {
-
-    navigator.geolocation.clearWatch(gpsWatchId);
-    gpsWatchId = null;
   }
 
   navigator.geolocation.getCurrentPosition(
@@ -247,15 +272,14 @@ function getGPS() {
    GPS BUTTON
 ========================================= */
 
-const gpsBtn = g('gpsBtn');
-
-if (gpsBtn) {
-  gpsBtn.addEventListener('click', getGPS);
-}
+g('gpsBtn')?.addEventListener(
+  'click',
+  getGPS
+);
 
 
 /* =========================================
-   PAGE LOAD GPS
+   PAGE LOAD
 ========================================= */
 
 window.addEventListener('load', function () {
@@ -292,19 +316,24 @@ function getDateTime() {
    PHOTO PREVIEW
 ========================================= */
 
-const photoInput = g('photo');
+g('photo')?.addEventListener(
+  'change',
 
-if (photoInput) {
+  function () {
 
-  photoInput.addEventListener('change', function () {
-
-    const file = photoInput.files[0];
+    const file = this.files[0];
 
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
 
-      photoInput.value = '';
+      showMessage(
+        '❌ कृपया योग्य Image File निवडा.',
+        'error'
+      );
+
+      this.value = '';
+
       return;
     }
 
@@ -314,16 +343,13 @@ if (photoInput) {
 
       const preview = g('preview');
 
-      if (preview) {
-
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      }
+      preview.src = e.target.result;
+      preview.style.display = 'block';
     };
 
     reader.readAsDataURL(file);
-  });
-}
+  }
+);
 
 
 /* =========================================
@@ -333,8 +359,11 @@ if (photoInput) {
 function safeName(text) {
 
   return String(text || '')
+
     .trim()
+
     .replace(/[\\/:*?"<>|]/g, '_')
+
     .replace(/\s+/g, '_');
 }
 
@@ -362,12 +391,19 @@ function stamped(file) {
 
         if (width > MAX_WIDTH) {
 
-          height = Math.round(height * MAX_WIDTH / width);
+          height =
+            Math.round(
+              height * MAX_WIDTH / width
+            );
+
           width = MAX_WIDTH;
         }
 
         const fontSize =
-          Math.max(20, Math.round(width / 42));
+          Math.max(
+            20,
+            Math.round(width / 42)
+          );
 
         const lineHeight =
           Math.round(fontSize * 1.5);
@@ -376,7 +412,8 @@ function stamped(file) {
           Math.round(fontSize * 0.8);
 
         const infoHeight =
-          lineHeight * 5 + padding * 2;
+          lineHeight * 5 +
+          padding * 2;
 
         const canvas =
           document.createElement('canvas');
@@ -384,7 +421,8 @@ function stamped(file) {
         canvas.width = width;
         canvas.height = height + infoHeight;
 
-        const ctx = canvas.getContext('2d');
+        const ctx =
+          canvas.getContext('2d');
 
         ctx.drawImage(
           img,
@@ -407,7 +445,8 @@ function stamped(file) {
         ctx.fillStyle = '#ffffff';
 
         ctx.font =
-          'bold ' + fontSize +
+          'bold ' +
+          fontSize +
           'px Arial, sans-serif';
 
         const lines = [
@@ -434,7 +473,9 @@ function stamped(file) {
         ];
 
         let y =
-          height + padding + fontSize;
+          height +
+          padding +
+          fontSize;
 
         lines.forEach(function (line) {
 
@@ -448,6 +489,7 @@ function stamped(file) {
         });
 
         resolve(
+
           canvas.toDataURL(
             'image/jpeg',
             0.85
@@ -456,6 +498,7 @@ function stamped(file) {
       };
 
       img.onerror = reject;
+
       img.src = e.target.result;
     };
 
@@ -483,16 +526,25 @@ function validateMobile() {
 
 function validateGPS() {
 
-  if (!lat || !lng) {
+  if (
+    !lat ||
+    !lng
+  ) {
+
     return {
+
       valid: false,
       warning: false
+
     };
   }
 
   return {
+
     valid: true,
-    warning: Number(accuracy) > 100
+
+    warning:
+      Number(accuracy) > 100
   };
 }
 
@@ -504,10 +556,15 @@ function validateGPS() {
 function escapeHTML(value) {
 
   return String(value || '')
+
     .replace(/&/g, '&amp;')
+
     .replace(/</g, '&lt;')
+
     .replace(/>/g, '&gt;')
+
     .replace(/"/g, '&quot;')
+
     .replace(/'/g, '&#039;');
 }
 
@@ -520,14 +577,26 @@ function createReportData() {
 
   return {
 
-    farmer: g('farmer').value.trim(),
-    village: g('village').value,
-    survey: g('survey').value.trim(),
-    area: g('area').value.trim(),
-    mobile: g('mobile').value.trim(),
+    farmer:
+      g('farmer').value.trim(),
 
-    eCrop: g('eCrop').value,
-    actualStatus: g('actualStatus').value,
+    village:
+      g('village').value,
+
+    survey:
+      g('survey').value.trim(),
+
+    area:
+      g('area').value.trim(),
+
+    mobile:
+      g('mobile').value.trim(),
+
+    eCrop:
+      g('eCrop').value,
+
+    actualStatus:
+      g('actualStatus').value,
 
     localStatement:
       g('localStatement').value,
@@ -542,7 +611,9 @@ function createReportData() {
       g('remark').value.trim(),
 
     lat: lat,
+
     lng: lng,
+
     accuracy: accuracy,
 
     verificationTime:
@@ -563,32 +634,194 @@ function getReportResult(status) {
   ) {
 
     return {
-      className: 'report-error',
+
+      className:
+        'report-error',
+
       text:
         '❌ प्रत्यक्ष पाहणीमध्ये ज्वारीचे पीक आढळून आले नाही.'
     };
   }
 
   if (
+
     status ===
-      'काढणी झालेले / अवशेष उपलब्ध'
+    'काढणी झालेले / अवशेष उपलब्ध'
+
     ||
+
     status ===
-      'पुढील चौकशी आवश्यक'
+    'पुढील चौकशी आवश्यक'
   ) {
 
     return {
-      className: 'report-warning',
+
+      className:
+        'report-warning',
+
       text:
         '⚠️ सदर प्रकरणात पुढील चौकशी / पडताळणी आवश्यक आहे.'
     };
   }
 
   return {
-    className: 'report-success',
+
+    className:
+      'report-success',
+
     text:
       '✅ प्रत्यक्ष पाहणीमध्ये ज्वारीचे पीक आढळून आले आहे.'
   };
+}
+
+
+/* =========================================
+   CREATE OFFICIAL REPORT HTML
+========================================= */
+
+function generateReportHTML(data) {
+
+  const result =
+    getReportResult(
+      data.actualStatus
+    );
+
+  return `
+
+    <div class="official-report">
+
+      <div class="report-header">
+
+        <h2>
+          ज्वारी पीक प्रत्यक्ष पडताळणी अहवाल
+        </h2>
+
+        <p>
+          ग्राम महसूल अधिकारी कार्यालय
+        </p>
+
+      </div>
+
+      <hr>
+
+      <p>
+        <b>शेतकऱ्याचे पूर्ण नाव:</b>
+        ${escapeHTML(data.farmer)}
+      </p>
+
+      <p>
+        <b>गाव:</b>
+        ${escapeHTML(data.village)}
+      </p>
+
+      <p>
+        <b>गट / सर्वे नंबर:</b>
+        ${escapeHTML(data.survey)}
+      </p>
+
+      <p>
+        <b>क्षेत्र:</b>
+        ${escapeHTML(data.area || '-')}
+        हे.आर.
+      </p>
+
+      <p>
+        <b>मोबाईल नंबर:</b>
+        ${escapeHTML(data.mobile || '-')}
+      </p>
+
+      <hr>
+
+      <h3>
+        पीक पडताळणी माहिती
+      </h3>
+
+      <p>
+        <b>ई-पीक पाहणीतील नोंद:</b>
+        ${escapeHTML(data.eCrop)}
+      </p>
+
+      <p>
+        <b>प्रत्यक्ष पाहणीतील स्थिती:</b>
+        ${escapeHTML(data.actualStatus)}
+      </p>
+
+      <p>
+        <b>स्थानिक शेतकऱ्यांचे बयान:</b>
+        ${escapeHTML(data.localStatement)}
+      </p>
+
+      <p>
+        <b>खत / बियाणे पावती पाहिली:</b>
+        ${escapeHTML(data.receiptChecked)}
+      </p>
+
+      <hr>
+
+      <h3>
+        GPS माहिती
+      </h3>
+
+      <p>
+        <b>Latitude:</b>
+        ${Number(data.lat).toFixed(6)}
+      </p>
+
+      <p>
+        <b>Longitude:</b>
+        ${Number(data.lng).toFixed(6)}
+      </p>
+
+      <p>
+        <b>GPS Accuracy:</b>
+        ${Math.round(data.accuracy)}
+        मीटर
+      </p>
+
+      <p>
+        <b>पडताळणी दिनांक व वेळ:</b>
+        ${escapeHTML(data.verificationTime)}
+      </p>
+
+      <hr>
+
+      <p>
+        <b>पडताळणी अधिकाऱ्याचे नाव:</b>
+        ${escapeHTML(data.officer || '-')}
+      </p>
+
+      <p>
+        <b>शेरा:</b><br>
+        ${escapeHTML(data.remark || '-')}
+      </p>
+
+      <hr>
+
+      <div class="report-result">
+
+        <b>पडताळणीचा निकाल:</b><br><br>
+
+        ${result.text}
+
+      </div>
+
+      <div class="signature-area">
+
+        <div>
+          शेतकरी / उपस्थित व्यक्ती<br><br><br>
+          सही
+        </div>
+
+        <div>
+          पडताळणी अधिकारी<br><br><br>
+          सही
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
 }
 
 
@@ -598,18 +831,19 @@ function getReportResult(status) {
 
 function showReport() {
 
-  const reportBox = g('reportBox');
-  const reportContent = g('reportContent');
+  const reportBox =
+    g('reportBox');
 
-  if (!reportBox || !reportContent) {
+  const reportContent =
+    g('reportContent');
 
-    console.error('Report elements सापडले नाहीत.');
-
-    return;
-  }
+  const reportEditor =
+    g('reportEditor');
 
   if (!reportData) {
-    reportData = createReportData();
+
+    reportData =
+      createReportData();
   }
 
   const result =
@@ -622,88 +856,46 @@ function showReport() {
     result.className;
 
   reportContent.innerHTML =
+    generateReportHTML(
+      reportData
+    );
 
-    '<h3>📄 ज्वारी पीक प्रत्यक्ष पडताळणी अहवाल</h3>' +
+  reportContent.style.display =
+    'block';
 
-    '<p><b>शेतकऱ्याचे पूर्ण नाव:</b> ' +
-    escapeHTML(reportData.farmer) +
-    '</p>' +
+  reportEditor.style.display =
+    'none';
 
-    '<p><b>गाव:</b> ' +
-    escapeHTML(reportData.village) +
-    '</p>' +
+  reportBox.style.display =
+    'block';
 
-    '<p><b>गट / सर्वे नंबर:</b> ' +
-    escapeHTML(reportData.survey) +
-    '</p>' +
 
-    '<p><b>क्षेत्र:</b> ' +
-    escapeHTML(reportData.area || '-') +
-    ' हे.आर.</p>' +
+  /* BUTTONS */
 
-    '<p><b>मोबाईल नंबर:</b> ' +
-    escapeHTML(reportData.mobile || '-') +
-    '</p>' +
+  g('reportBtn').style.display =
+    'none';
 
-    '<hr>' +
+  g('editReportBtn').style.display =
+    'block';
 
-    '<p><b>ई-पीक पाहणीतील नोंद:</b> ' +
-    escapeHTML(reportData.eCrop) +
-    '</p>' +
+  g('saveReportBtn').style.display =
+    'none';
 
-    '<p><b>प्रत्यक्ष पाहणीतील स्थिती:</b> ' +
-    escapeHTML(reportData.actualStatus) +
-    '</p>' +
+  g('printBtn').style.display =
+    'block';
 
-    '<p><b>स्थानिक शेतकऱ्यांचे बयान:</b> ' +
-    escapeHTML(reportData.localStatement) +
-    '</p>' +
+  g('newEntryBtn').style.display =
+    'block';
 
-    '<p><b>खत / बियाणे पावती पाहिली:</b> ' +
-    escapeHTML(reportData.receiptChecked) +
-    '</p>' +
-
-    '<hr>' +
-
-    '<p><b>📍 Latitude:</b> ' +
-    Number(reportData.lat).toFixed(6) +
-    '</p>' +
-
-    '<p><b>📍 Longitude:</b> ' +
-    Number(reportData.lng).toFixed(6) +
-    '</p>' +
-
-    '<p><b>🎯 GPS Accuracy:</b> ' +
-    Math.round(reportData.accuracy) +
-    ' मीटर</p>' +
-
-    '<p><b>🕒 पडताळणी दिनांक व वेळ:</b> ' +
-    escapeHTML(reportData.verificationTime) +
-    '</p>' +
-
-    '<hr>' +
-
-    '<p><b>पडताळणी अधिकाऱ्याचे नाव:</b> ' +
-    escapeHTML(reportData.officer || '-') +
-    '</p>' +
-
-    '<p><b>शेरा:</b> ' +
-    escapeHTML(reportData.remark || '-') +
-    '</p>' +
-
-    '<hr>' +
-
-    '<p><b>पडताळणीचा निकाल:</b><br>' +
-    result.text +
-    '</p>';
-
-  reportBox.style.display = 'block';
 
   setTimeout(function () {
 
     reportBox.scrollIntoView({
+
       behavior: 'smooth',
+
       block: 'start'
+
     });
 
   }, 300);
@@ -714,154 +906,205 @@ function showReport() {
    REPORT BUTTON
 ========================================= */
 
-const reportBtn = g('reportBtn');
+g('reportBtn')?.addEventListener(
+  'click',
 
-if (reportBtn) {
+  function () {
 
-  reportBtn.addEventListener('click', function () {
-
-    reportData = createReportData();
+    reportData =
+      createReportData();
 
     showReport();
-  });
-}
+  }
+);
 
 
 /* =========================================
    EDIT REPORT
 ========================================= */
 
-const editReportBtn = g('editReportBtn');
+g('editReportBtn')?.addEventListener(
 
-if (editReportBtn) {
+  'click',
 
-  editReportBtn.addEventListener(
-    'click',
-    function () {
+  function () {
 
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    const reportContent =
+      g('reportContent');
 
-      const saveBtn = g('saveReportBtn');
+    const reportEditor =
+      g('reportEditor');
 
-      if (saveBtn) {
-        saveBtn.style.display = 'block';
-      }
+    reportEditor.value =
+      reportContent.innerText;
 
-      editReportBtn.style.display = 'none';
-    }
-  );
-}
+    reportContent.style.display =
+      'none';
+
+    reportEditor.style.display =
+      'block';
+
+
+    g('editReportBtn').style.display =
+      'none';
+
+    g('saveReportBtn').style.display =
+      'block';
+
+    g('printBtn').style.display =
+      'none';
+
+    reportEditor.focus();
+  }
+);
 
 
 /* =========================================
-   SAVE REPORT CHANGES
+   SAVE EDITED REPORT
 ========================================= */
 
-const saveReportBtn =
-  g('saveReportBtn');
+g('saveReportBtn')?.addEventListener(
 
-if (saveReportBtn) {
+  'click',
 
-  saveReportBtn.addEventListener(
-    'click',
-    function () {
+  function () {
 
-      reportData =
-        createReportData();
+    const reportContent =
+      g('reportContent');
 
-      showReport();
+    const reportEditor =
+      g('reportEditor');
 
-      saveReportBtn.style.display =
-        'none';
+    const editedText =
+      reportEditor.value.trim();
 
-      if (editReportBtn) {
-        editReportBtn.style.display =
-          'block';
-      }
+    if (!editedText) {
+
+      showMessage(
+        '⚠️ अहवाल रिकामा ठेवू शकत नाही.',
+        'error'
+      );
+
+      return;
     }
-  );
-}
+
+    reportContent.innerHTML =
+      `<div class="edited-report">
+        ${escapeHTML(editedText)
+          .replace(/\n/g, '<br>')}
+      </div>`;
+
+    reportContent.style.display =
+      'block';
+
+    reportEditor.style.display =
+      'none';
+
+
+    g('saveReportBtn').style.display =
+      'none';
+
+    g('editReportBtn').style.display =
+      'block';
+
+    g('printBtn').style.display =
+      'block';
+
+    showMessage(
+      '✅ अहवालातील बदल यशस्वीरित्या जतन करण्यात आले.',
+      'success'
+    );
+  }
+);
 
 
 /* =========================================
    SUBMIT FORM
 ========================================= */
 
-const submitBtn = g('submitBtn');
+g('submitBtn')?.addEventListener(
 
-if (submitBtn) {
+  'click',
 
-  submitBtn.addEventListener(
-    'click',
+  async function () {
 
-    async function () {
-
-      const need = [];
-
-      if (!g('farmer').value.trim()) {
-        need.push('शेतकऱ्याचे नाव');
-      }
-
-      if (!g('village').value) {
-        need.push('गाव');
-      }
-
-      if (!g('survey').value.trim()) {
-        need.push('गट / सर्वे नंबर');
-      }
-
-      if (!g('eCrop').value) {
-        need.push('ई-पीक नोंद');
-      }
-
-      if (!g('actualStatus').value) {
-        need.push('प्रत्यक्ष पाहणीतील स्थिती');
-      }
-
-      if (!g('photo').files[0]) {
-        need.push('प्रत्यक्ष फोटो');
-      }
-
-      const gpsCheck = validateGPS();
-
-      if (!gpsCheck.valid) {
-        need.push('GPS Location');
-      }
-
-      if (!validateMobile()) {
-        need.push(
-          'योग्य 10 अंकी मोबाईल नंबर'
-        );
-      }
+    const need = [];
 
 
-      /* VALIDATION ERROR */
+    if (!g('farmer').value.trim()) {
+      need.push('शेतकऱ्याचे नाव');
+    }
 
-      if (need.length > 0) {
+    if (!g('village').value) {
+      need.push('गाव');
+    }
 
-        showMessage(
+    if (!g('survey').value.trim()) {
+      need.push('गट / सर्वे नंबर');
+    }
 
-          '⚠️ खालील माहिती आवश्यक आहे:<br><br>' +
+    if (!g('eCrop').value) {
+      need.push('ई-पीक नोंद');
+    }
 
-          need
-            .map(x => '❌ ' + x)
-            .join('<br>'),
+    if (!g('actualStatus').value) {
+      need.push('प्रत्यक्ष पाहणीतील स्थिती');
+    }
 
-          'error'
-        );
-
-        return;
-      }
+    if (!g('photo').files[0]) {
+      need.push('प्रत्यक्ष फोटो');
+    }
 
 
-      /* GPS WARNING */
+    const gpsCheck =
+      validateGPS();
 
-      if (gpsCheck.warning) {
 
-        const confirmSubmit = confirm(
+    if (!gpsCheck.valid) {
+
+      need.push(
+        'GPS Location'
+      );
+    }
+
+
+    if (!validateMobile()) {
+
+      need.push(
+        'योग्य 10 अंकी मोबाईल नंबर'
+      );
+    }
+
+
+    /* VALIDATION */
+
+    if (need.length > 0) {
+
+      showMessage(
+
+        `
+        ⚠️ खालील माहिती आवश्यक आहे:<br><br>
+
+        ${need
+          .map(
+            x => '❌ ' + x
+          )
+          .join('<br>')}
+        `,
+
+        'error'
+      );
+
+      return;
+    }
+
+
+    /* GPS WARNING */
+
+    if (gpsCheck.warning) {
+
+      const confirmSubmit =
+        confirm(
 
           '⚠️ GPS Accuracy ' +
           Math.round(accuracy) +
@@ -869,247 +1112,236 @@ if (submitBtn) {
           'तरीही Submit करायचे आहे का?'
         );
 
-        if (!confirmSubmit) return;
-      }
+      if (!confirmSubmit) return;
+    }
 
 
-      submitBtn.disabled = true;
+    const submitBtn =
+      g('submitBtn');
+
+    submitBtn.disabled =
+      true;
+
+    submitBtn.innerHTML =
+      '⏳ माहिती साठवत आहे...';
+
+    showMessage('', '');
+
+
+    try {
+
+      const file =
+        g('photo').files[0];
+
+
+      const imageData =
+        await stamped(file);
+
+
+      const fileName =
+
+        'JWARI_' +
+
+        safeName(
+          g('farmer').value
+        ) +
+
+        '_' +
+
+        safeName(
+          g('village').value
+        ) +
+
+        '_' +
+
+        safeName(
+          g('survey').value
+        ) +
+
+        '_' +
+
+        Date.now() +
+
+        '.jpg';
+
+
+      const data = {
+
+        farmer:
+          g('farmer').value.trim(),
+
+        village:
+          g('village').value,
+
+        survey:
+          g('survey').value.trim(),
+
+        area:
+          g('area').value.trim(),
+
+        mobile:
+          g('mobile').value.trim(),
+
+        eCrop:
+          g('eCrop').value,
+
+        actualStatus:
+          g('actualStatus').value,
+
+        localStatement:
+          g('localStatement').value,
+
+        receiptChecked:
+          g('receiptChecked').value,
+
+        officer:
+          g('officer').value.trim(),
+
+        remark:
+          g('remark').value.trim(),
+
+        lat: lat,
+
+        lng: lng,
+
+        accuracy: accuracy,
+
+        gpsTimestamp:
+          gpsTimestamp,
+
+        capturedAt:
+          new Date().toISOString(),
+
+        fileName:
+          fileName,
+
+        mimeType:
+          'image/jpeg',
+
+        imageBase64:
+          imageData.split(',')[1]
+      };
+
+
+      await fetch(
+
+        URL,
+
+        {
+
+          method: 'POST',
+
+          mode: 'no-cors',
+
+          headers: {
+
+            'Content-Type':
+              'text/plain;charset=utf-8'
+          },
+
+          body:
+            JSON.stringify(data)
+        }
+      );
+
+
+      /* SAVE REPORT DATA */
+
+      reportData =
+        createReportData();
+
+
+      /* SUCCESS */
+
+      showMessage(
+
+        '✅ <b>माहिती यशस्वीरित्या साठविण्यात आली!</b>',
+
+        'success'
+      );
+
+
+      showAI(
+
+        'प्रत्यक्ष पीक पडताळणीची माहिती यशस्वीरित्या नोंदविण्यात आली आहे.',
+
+        'success'
+      );
+
+
+      /* AUTO REPORT */
+
+      showReport();
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      showMessage(
+
+        '❌ माहिती साठविताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा.',
+
+        'error'
+      );
+    }
+
+    finally {
+
+      submitBtn.disabled =
+        false;
 
       submitBtn.innerHTML =
-        '⏳ माहिती साठवत आहे...';
-
-
-      /* SUBMIT दरम्यान कोणताही MESSAGE नाही */
-
-      showMessage('', '');
-
-
-      try {
-
-        const file =
-          g('photo').files[0];
-
-        const imageData =
-          await stamped(file);
-
-
-        const fileName =
-
-          'JWARI_' +
-
-          safeName(
-            g('farmer').value
-          ) +
-
-          '_' +
-
-          safeName(
-            g('village').value
-          ) +
-
-          '_' +
-
-          safeName(
-            g('survey').value
-          ) +
-
-          '_' +
-
-          Date.now() +
-
-          '.jpg';
-
-
-        const data = {
-
-          farmer:
-            g('farmer').value.trim(),
-
-          village:
-            g('village').value,
-
-          survey:
-            g('survey').value.trim(),
-
-          area:
-            g('area').value.trim(),
-
-          mobile:
-            g('mobile').value.trim(),
-
-          eCrop:
-            g('eCrop').value,
-
-          actualStatus:
-            g('actualStatus').value,
-
-          localStatement:
-            g('localStatement').value,
-
-          receiptChecked:
-            g('receiptChecked').value,
-
-          officer:
-            g('officer').value.trim(),
-
-          remark:
-            g('remark').value.trim(),
-
-          lat: lat,
-          lng: lng,
-          accuracy: accuracy,
-
-          gpsTimestamp:
-            gpsTimestamp,
-
-          capturedAt:
-            new Date().toISOString(),
-
-          fileName:
-            fileName,
-
-          mimeType:
-            'image/jpeg',
-
-          imageBase64:
-            imageData.split(',')[1]
-        };
-
-
-        await fetch(
-
-          URL,
-
-          {
-            method: 'POST',
-            mode: 'no-cors',
-
-            headers: {
-              'Content-Type':
-                'text/plain;charset=utf-8'
-            },
-
-            body:
-              JSON.stringify(data)
-          }
-        );
-
-
-        /* REPORT DATA SAVE */
-
-        reportData =
-          createReportData();
-
-
-        /* =====================================
-           फक्त हाच SUCCESS MESSAGE
-        ===================================== */
-
-        showMessage(
-
-          '✅ <b>माहिती यशस्वीरित्या साठविण्यात आली!</b>',
-
-          'success'
-        );
-
-
-        /* AI BOX मधील MESSAGE काढून टाकला */
-
-        showAI(
-          '🤖 AI पडताळणी',
-          'success'
-        );
-
-
-        /* REPORT AUTO CREATE */
-
-        showReport();
-
-
-        /* STOP GPS WATCH */
-
-        if (gpsWatchId !== null) {
-
-          navigator.geolocation.clearWatch(
-            gpsWatchId
-          );
-
-          gpsWatchId = null;
-        }
-
-      }
-
-      catch (error) {
-
-        console.error(error);
-
-        showMessage(
-
-          '❌ माहिती साठविताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा.',
-
-          'error'
-        );
-      }
-
-      finally {
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML =
-          '✅ माहिती Submit करा';
-      }
+        '✅ माहिती Submit करा';
     }
-  );
-}
+  }
+);
 
 
 /* =========================================
    PRINT REPORT
 ========================================= */
 
-const printBtn = g('printBtn');
+g('printBtn')?.addEventListener(
 
-if (printBtn) {
+  'click',
 
-  printBtn.addEventListener(
-    'click',
+  function () {
 
-    function () {
-      window.print();
-    }
-  );
-}
+    window.print();
+
+  }
+);
 
 
 /* =========================================
    NEW ENTRY
 ========================================= */
 
-const newEntryBtn =
-  g('newEntryBtn');
+g('newEntryBtn')?.addEventListener(
 
-if (newEntryBtn) {
+  'click',
 
-  newEntryBtn.addEventListener(
-    'click',
+  function () {
 
-    function () {
-
-      const confirmNew = confirm(
+    const confirmNew =
+      confirm(
         'नवीन नोंद सुरू करायची आहे का?'
       );
 
-      if (!confirmNew) return;
+    if (!confirmNew) return;
 
-      resetForm();
+    resetForm();
 
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  );
-}
+    window.scrollTo({
+
+      top: 0,
+
+      behavior: 'smooth'
+    });
+  }
+);
 
 
 /* =========================================
@@ -1127,58 +1359,80 @@ function resetForm() {
   g('eCrop').value = '';
   g('actualStatus').value = '';
 
-  g('localStatement').value = 'होय';
-  g('receiptChecked').value = 'होय';
+  g('localStatement').value =
+    'होय';
+
+  g('receiptChecked').value =
+    'होय';
 
   g('officer').value = '';
   g('remark').value = '';
 
   g('photo').value = '';
 
-  const preview = g('preview');
 
-  if (preview) {
+  const preview =
+    g('preview');
 
-    preview.src = '';
-    preview.style.display = 'none';
-  }
+  preview.src = '';
+
+  preview.style.display =
+    'none';
+
 
   reportData = null;
 
-  showMessage('', '');
+
+  showMessage(
+    '',
+    ''
+  );
+
 
   showAI(
-    '🤖 AI पडताळणी'
+    'फोटो Submit केल्यानंतर AI पडताळणीचा निकाल येथे दिसेल.'
   );
+
 
   const reportBox =
     g('reportBox');
 
-  if (reportBox) {
+  reportBox.style.display =
+    'none';
 
-    reportBox.style.display =
-      'none';
-  }
 
-  const saveBtn =
-    g('saveReportBtn');
+  g('reportContent').innerHTML =
+    '';
 
-  if (saveBtn) {
 
-    saveBtn.style.display =
-      'none';
-  }
+  g('reportEditor').value =
+    '';
 
-  if (editReportBtn) {
+  g('reportEditor').style.display =
+    'none';
 
-    editReportBtn.style.display =
-      'block';
-  }
+
+  g('reportBtn').style.display =
+    'block';
+
+  g('editReportBtn').style.display =
+    'none';
+
+  g('saveReportBtn').style.display =
+    'none';
+
+  g('printBtn').style.display =
+    'none';
+
+  g('newEntryBtn').style.display =
+    'none';
+
 
   lat = '';
   lng = '';
   accuracy = '';
   gpsTimestamp = '';
+
 
   setTimeout(
     getGPS,
