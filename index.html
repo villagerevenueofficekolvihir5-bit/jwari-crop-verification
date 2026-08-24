@@ -5,9 +5,13 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#1b5e20">
+<meta
+  name="theme-color"
+  content="#1b5e20">
 
 <meta
   name="description"
@@ -23,6 +27,7 @@
 <body>
 
 <div class="container">
+
 <div class="card">
 
 
@@ -33,6 +38,9 @@
 <div class="header">
 
   <div class="government-header">
+
+
+    <!-- भारत सरकार लोगो -->
 
     <div class="logo-box">
 
@@ -45,11 +53,17 @@
     </div>
 
 
+    <!-- TITLE -->
+
     <div class="header-title">
 
-      <h1>🌾 ज्वारी पीक पडताळणी</h1>
+      <h1>
+        🌾 ज्वारी पीक पडताळणी
+      </h1>
 
-      <p>Crop Verification System</p>
+      <p>
+        Crop Verification System
+      </p>
 
       <small>
         ग्राम महसूल अधिकारी कार्यालय
@@ -57,6 +71,8 @@
 
     </div>
 
+
+    <!-- महाराष्ट्र शासन लोगो -->
 
     <div class="logo-box">
 
@@ -67,6 +83,7 @@
         id="maharashtraLogo">
 
     </div>
+
 
   </div>
 
@@ -79,7 +96,9 @@
 ========================================= -->
 
 <div class="section-title">
+
 👨‍🌾 शेतकरी माहिती
+
 </div>
 
 
@@ -96,6 +115,7 @@
   placeholder="शेतकऱ्याचे पूर्ण नाव लिहा">
 
 </div>
+
 
 
 <div class="form-group">
@@ -131,6 +151,7 @@
 </div>
 
 
+
 <div class="form-group">
 
 <label for="survey">
@@ -143,6 +164,7 @@
   placeholder="उदा. 46/1/अ">
 
 </div>
+
 
 
 <div class="form-group">
@@ -158,6 +180,7 @@
   placeholder="उदा. 2.50">
 
 </div>
+
 
 
 <div class="form-group">
@@ -182,8 +205,11 @@
 ========================================= -->
 
 <div class="section-title">
+
 🌾 पीक पडताळणी माहिती
+
 </div>
+
 
 
 <div class="form-group">
@@ -209,6 +235,7 @@
 </select>
 
 </div>
+
 
 
 <div class="form-group">
@@ -244,6 +271,7 @@
 </div>
 
 
+
 <div class="form-group">
 
 <label for="localStatement">
@@ -263,6 +291,7 @@
 </select>
 
 </div>
+
 
 
 <div class="form-group">
@@ -286,6 +315,7 @@
 </div>
 
 
+
 <div class="form-group">
 
 <label for="officer">
@@ -300,6 +330,7 @@
 </div>
 
 
+
 <div class="form-group">
 
 <label for="remark">
@@ -308,8 +339,7 @@
 
 <textarea
   id="remark"
-  placeholder="आवश्यक असल्यास शेरा लिहा">
-</textarea>
+  placeholder="आवश्यक असल्यास शेरा लिहा"></textarea>
 
 </div>
 
@@ -320,21 +350,30 @@
 ========================================= -->
 
 <div class="section-title">
+
 📍 GPS Location
+
 </div>
 
 
-<div class="gps-box" id="gps">
+<div
+  class="gps-box"
+  id="gps">
 
   <div class="gps-status">
 
-    <span class="gps-icon">📍</span>
+    <span class="gps-icon">
+      📍
+    </span>
 
     <strong id="gpsText">
+
       GPS Location मिळवत आहे...
+
     </strong>
 
   </div>
+
 
   <div
     id="gpsDetails"
@@ -363,7 +402,9 @@
 ========================================= -->
 
 <div class="section-title">
+
 📷 प्रत्यक्ष पीक फोटो
+
 </div>
 
 
@@ -388,6 +429,7 @@
 </div>
 
 
+
 <div class="preview-container">
 
 <img
@@ -407,7 +449,9 @@
   class="ai-box">
 
   <div class="ai-title">
+
     🤖 AI पडताळणी
+
   </div>
 
   <div id="aiText">
@@ -421,7 +465,7 @@
 
 
 <!-- =========================================
-     SUBMIT
+     SUBMIT BUTTON
 ========================================= -->
 
 <button
@@ -429,14 +473,14 @@
   id="submitBtn"
   class="submit-btn">
 
-✅ माहिती Submit करा
+  ✅ माहिती Submit करा
 
 </button>
 
 
 
 <!-- =========================================
-     SUCCESS MESSAGE
+     SUCCESS / ERROR MESSAGE
 ========================================= -->
 
 <div
@@ -449,13 +493,15 @@
 
 <!-- =========================================
      REPORT SECTION
-     फक्त एकदाच ठेवले आहे
 ========================================= -->
 
 <div
   id="reportBox"
   class="report-box"
   style="display:none;">
+
+
+  <!-- REPORT TITLE -->
 
   <div class="report-title">
 
@@ -464,16 +510,18 @@
   </div>
 
 
-  <!-- Submit नंतर दिसणारा संदेश -->
+  <!-- SUCCESS MESSAGE -->
 
-  <div id="reportStatus">
+  <div
+    id="reportStatus"
+    style="display:none;">
 
     माहिती यशस्वीरित्या साठविण्यात आली आहे.
 
   </div>
 
 
-  <!-- अहवाल येथे दिसेल -->
+  <!-- REPORT CONTENT -->
 
   <div
     id="reportContent"
@@ -482,21 +530,22 @@
   </div>
 
 
-  <!-- Edit करण्यासाठी Textarea -->
+  <!-- EDIT REPORT -->
 
   <textarea
     id="reportEditor"
     class="report-editor"
     style="display:none;"
-    placeholder="येथे अहवाल Edit करा...">
-  </textarea>
+    placeholder="येथे अहवाल Edit करा..."></textarea>
 
 
+
+  <!-- REPORT ACTION BUTTONS -->
 
   <div class="report-actions">
 
 
-    <!-- अहवाल तयार करा -->
+    <!-- REPORT -->
 
     <button
       type="button"
@@ -508,7 +557,7 @@
     </button>
 
 
-    <!-- Edit -->
+    <!-- EDIT -->
 
     <button
       type="button"
@@ -521,7 +570,7 @@
     </button>
 
 
-    <!-- Save -->
+    <!-- SAVE -->
 
     <button
       type="button"
@@ -534,7 +583,7 @@
     </button>
 
 
-    <!-- Print -->
+    <!-- PRINT -->
 
     <button
       type="button"
@@ -547,7 +596,7 @@
     </button>
 
 
-    <!-- नवीन नोंद -->
+    <!-- NEW ENTRY -->
 
     <button
       type="button"
@@ -562,6 +611,7 @@
 
   </div>
 
+
 </div>
 
 
@@ -573,25 +623,33 @@
 <div class="footer">
 
   <div>
+
     🌾 ज्वारी पीक पडताळणी प्रणाली
+
   </div>
 
   <small>
+
     GPS आधारित प्रत्यक्ष पीक पडताळणी
+
   </small>
 
   <small>
+
     ग्राम महसूल अधिकारी कार्यालय
+
   </small>
 
 </div>
 
 
 </div>
+
 </div>
 
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
