@@ -2,7 +2,8 @@
    GOOGLE APPS SCRIPT WEB APP URL
 ========================================= */
 
-const URL = 'https://script.google.com/macros/s/AKfycbxf-DeTDrNmtqrALOv3MskWyIQZJjJUgKqPCAy5I_L9o8gydxsMdMqbpW-0FH2bSFKH/exec';
+const URL =
+  'https://script.google.com/macros/s/AKfycbxf-DeTDrNmtqrALOv3MskWyIQZJjJUgKqPCAy5I_L9o8gydxsMdMqbpW-0FH2bSFKH/exec';
 
 
 /* =========================================
@@ -169,15 +170,18 @@ function saveGPS(position) {
 
   if (accuracy <= 20) {
 
-    accuracyStatus = '🟢 <b>अतिशय अचूक GPS</b>';
+    accuracyStatus =
+      '🟢 <b>अतिशय अचूक GPS</b>';
 
   } else if (accuracy <= 50) {
 
-    accuracyStatus = '🟢 <b>GPS Accuracy चांगली आहे</b>';
+    accuracyStatus =
+      '🟢 <b>GPS Accuracy चांगली आहे</b>';
 
   } else if (accuracy <= 100) {
 
-    accuracyStatus = '🟡 <b>GPS Accuracy मध्यम आहे</b>';
+    accuracyStatus =
+      '🟡 <b>GPS Accuracy मध्यम आहे</b>';
 
   } else {
 
@@ -189,19 +193,36 @@ function saveGPS(position) {
 
     `
     <div class="gps-status">
+
       <span class="gps-icon">📍</span>
-      <strong>GPS Location मिळाले</strong>
+
+      <strong>
+        GPS Location मिळाले
+      </strong>
+
     </div>
 
     <div class="gps-details">
 
-      📍 Latitude: ${Number(lat).toFixed(6)}<br>
+      📍 Latitude:
+      ${Number(lat).toFixed(6)}
 
-      📍 Longitude: ${Number(lng).toFixed(6)}<br>
+      <br>
 
-      🎯 Accuracy: ${Math.round(accuracy)} मीटर<br>
+      📍 Longitude:
+      ${Number(lng).toFixed(6)}
 
-      🕒 वेळ: ${getDateTime()}<br><br>
+      <br>
+
+      🎯 Accuracy:
+      ${Math.round(accuracy)} मीटर
+
+      <br>
+
+      🕒 वेळ:
+      ${getDateTime()}
+
+      <br><br>
 
       ${accuracyStatus}
 
@@ -282,11 +303,17 @@ g('gpsBtn')?.addEventListener(
    PAGE LOAD
 ========================================= */
 
-window.addEventListener('load', function () {
+window.addEventListener(
+  'load',
+  function () {
 
-  setTimeout(getGPS, 1000);
+    setTimeout(
+      getGPS,
+      1000
+    );
 
-});
+  }
+);
 
 
 /* =========================================
@@ -317,6 +344,7 @@ function getDateTime() {
 ========================================= */
 
 g('photo')?.addEventListener(
+
   'change',
 
   function () {
@@ -598,6 +626,9 @@ function createReportData() {
     actualStatus:
       g('actualStatus').value,
 
+    statementFarmer:
+      g('statementFarmer')?.value.trim() || '',
+
     localStatement:
       g('localStatement').value,
 
@@ -686,6 +717,39 @@ function generateReportHTML(data) {
       data.actualStatus
     );
 
+  const statementName =
+    data.statementFarmer ||
+    data.farmer;
+
+  let statementText = '';
+
+  if (data.localStatement === 'होय') {
+
+    statementText = `
+      मी, श्री./श्रीमती
+      <b>${escapeHTML(statementName)}</b>,
+      रा. <b>${escapeHTML(data.village)}</b>,
+      असे बयान देतो/देते की सदर
+      <b>${escapeHTML(data.farmer)}</b>
+      यांच्या गट / सर्वे नं.
+      <b>${escapeHTML(data.survey)}</b>
+      या शेतामध्ये ज्वारी पिकाची लागवड
+      करण्यात आलेली होती / आहे व सदर
+      ज्वारीचे पीक प्रत्यक्ष पाहिलेले आहे.
+    `;
+
+  } else {
+
+    statementText = `
+      मी, श्री./श्रीमती
+      <b>${escapeHTML(statementName)}</b>,
+      रा. <b>${escapeHTML(data.village)}</b>,
+      असे बयान देतो/देते की सदर
+      शेतातील ज्वारी पिकाबाबत
+      निश्चित माहिती उपलब्ध नाही.
+    `;
+  }
+
   return `
 
     <div class="official-report">
@@ -703,6 +767,10 @@ function generateReportHTML(data) {
       </div>
 
       <hr>
+
+      <h3>
+        १. शेतकऱ्याची माहिती
+      </h3>
 
       <p>
         <b>शेतकऱ्याचे पूर्ण नाव:</b>
@@ -733,7 +801,7 @@ function generateReportHTML(data) {
       <hr>
 
       <h3>
-        पीक पडताळणी माहिती
+        २. पीक पडताळणी माहिती
       </h3>
 
       <p>
@@ -747,11 +815,6 @@ function generateReportHTML(data) {
       </p>
 
       <p>
-        <b>स्थानिक शेतकऱ्यांचे बयान:</b>
-        ${escapeHTML(data.localStatement)}
-      </p>
-
-      <p>
         <b>खत / बियाणे पावती पाहिली:</b>
         ${escapeHTML(data.receiptChecked)}
       </p>
@@ -759,7 +822,53 @@ function generateReportHTML(data) {
       <hr>
 
       <h3>
-        GPS माहिती
+        ३. शेतकऱ्याचे स्वतंत्र बयान
+      </h3>
+
+      <div class="farmer-statement">
+
+        <p>
+          ${statementText}
+        </p>
+
+        <br><br>
+
+        <div class="statement-signature">
+
+          <div>
+
+            <b>
+              बयान देणाऱ्या शेतकऱ्याचे नाव:
+            </b>
+
+            <br>
+
+            ${escapeHTML(statementName)}
+
+          </div>
+
+          <div>
+
+            <br><br><br>
+
+            ______________________
+
+            <br>
+
+            <b>
+              शेतकऱ्याची स्वाक्षरी
+            </b>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <hr>
+
+      <h3>
+        ४. GPS माहिती
       </h3>
 
       <p>
@@ -779,27 +888,46 @@ function generateReportHTML(data) {
       </p>
 
       <p>
-        <b>पडताळणी दिनांक व वेळ:</b>
+        <b>
+          पडताळणी दिनांक व वेळ:
+        </b>
+
         ${escapeHTML(data.verificationTime)}
       </p>
 
       <hr>
 
+      <h3>
+        ५. पडताळणी अधिकाऱ्याची नोंद
+      </h3>
+
       <p>
-        <b>पडताळणी अधिकाऱ्याचे नाव:</b>
+        <b>
+          पडताळणी अधिकाऱ्याचे नाव:
+        </b>
+
         ${escapeHTML(data.officer || '-')}
       </p>
 
       <p>
-        <b>शेरा:</b><br>
+
+        <b>शेरा:</b>
+
+        <br>
+
         ${escapeHTML(data.remark || '-')}
+
       </p>
 
       <hr>
 
       <div class="report-result">
 
-        <b>पडताळणीचा निकाल:</b><br><br>
+        <b>
+          पडताळणीचा निकाल:
+        </b>
+
+        <br><br>
 
         ${result.text}
 
@@ -808,13 +936,31 @@ function generateReportHTML(data) {
       <div class="signature-area">
 
         <div>
-          शेतकरी / उपस्थित व्यक्ती<br><br><br>
+
+          उपस्थित शेतकरी / व्यक्ती
+
+          <br><br><br>
+
+          ______________________
+
+          <br>
+
           सही
+
         </div>
 
         <div>
-          पडताळणी अधिकारी<br><br><br>
+
+          पडताळणी अधिकारी
+
+          <br><br><br>
+
+          ______________________
+
+          <br>
+
           सही
+
         </div>
 
       </div>
@@ -907,6 +1053,7 @@ function showReport() {
 ========================================= */
 
 g('reportBtn')?.addEventListener(
+
   'click',
 
   function () {
@@ -943,7 +1090,6 @@ g('editReportBtn')?.addEventListener(
 
     reportEditor.style.display =
       'block';
-
 
     g('editReportBtn').style.display =
       'none';
@@ -999,7 +1145,6 @@ g('saveReportBtn')?.addEventListener(
 
     reportEditor.style.display =
       'none';
-
 
     g('saveReportBtn').style.display =
       'none';
@@ -1076,8 +1221,6 @@ g('submitBtn')?.addEventListener(
     }
 
 
-    /* VALIDATION */
-
     if (need.length > 0) {
 
       showMessage(
@@ -1098,8 +1241,6 @@ g('submitBtn')?.addEventListener(
       return;
     }
 
-
-    /* GPS WARNING */
 
     if (gpsCheck.warning) {
 
@@ -1132,7 +1273,6 @@ g('submitBtn')?.addEventListener(
 
       const file =
         g('photo').files[0];
-
 
       const imageData =
         await stamped(file);
@@ -1187,6 +1327,9 @@ g('submitBtn')?.addEventListener(
 
         actualStatus:
           g('actualStatus').value,
+
+        statementFarmer:
+          g('statementFarmer')?.value.trim() || '',
 
         localStatement:
           g('localStatement').value,
@@ -1245,13 +1388,9 @@ g('submitBtn')?.addEventListener(
       );
 
 
-      /* SAVE REPORT DATA */
-
       reportData =
         createReportData();
 
-
-      /* SUCCESS */
 
       showMessage(
 
@@ -1268,8 +1407,6 @@ g('submitBtn')?.addEventListener(
         'success'
       );
 
-
-      /* AUTO REPORT */
 
       showReport();
 
@@ -1358,6 +1495,12 @@ function resetForm() {
 
   g('eCrop').value = '';
   g('actualStatus').value = '';
+
+  if (g('statementFarmer')) {
+
+    g('statementFarmer').value = '';
+
+  }
 
   g('localStatement').value =
     'होय';
