@@ -630,7 +630,7 @@ function createReportData() {
       g('statementFarmer')?.value.trim() || '',
 
     localStatement:
-      g('localStatement').value,
+      g('localStatement')?.value.trim() || '',
 
     receiptChecked:
       g('receiptChecked').value,
@@ -721,35 +721,6 @@ function generateReportHTML(data) {
     data.statementFarmer ||
     data.farmer;
 
-  let statementText = '';
-
-  if (data.localStatement === 'होय') {
-
-    statementText = `
-      मी, श्री./श्रीमती
-      <b>${escapeHTML(statementName)}</b>,
-      रा. <b>${escapeHTML(data.village)}</b>,
-      असे बयान देतो/देते की सदर
-      <b>${escapeHTML(data.farmer)}</b>
-      यांच्या गट / सर्वे नं.
-      <b>${escapeHTML(data.survey)}</b>
-      या शेतामध्ये ज्वारी पिकाची लागवड
-      करण्यात आलेली होती / आहे व सदर
-      ज्वारीचे पीक प्रत्यक्ष पाहिलेले आहे.
-    `;
-
-  } else {
-
-    statementText = `
-      मी, श्री./श्रीमती
-      <b>${escapeHTML(statementName)}</b>,
-      रा. <b>${escapeHTML(data.village)}</b>,
-      असे बयान देतो/देते की सदर
-      शेतातील ज्वारी पिकाबाबत
-      निश्चित माहिती उपलब्ध नाही.
-    `;
-  }
-
   return `
 
     <div class="official-report">
@@ -828,7 +799,19 @@ function generateReportHTML(data) {
       <div class="farmer-statement">
 
         <p>
-          ${statementText}
+          <b>बयान देणाऱ्या शेतकऱ्याचे नाव:</b>
+          ${escapeHTML(statementName)}
+        </p>
+
+        <p>
+          <b>प्रत्यक्ष बयान:</b>
+        </p>
+
+        <p style="white-space: pre-wrap;">
+          ${escapeHTML(
+            data.localStatement ||
+            'कोणतेही बयान नोंदविण्यात आलेले नाही.'
+          )}
         </p>
 
         <br><br>
@@ -1015,9 +998,6 @@ function showReport() {
   reportBox.style.display =
     'block';
 
-
-  /* BUTTONS */
-
   g('reportBtn').style.display =
     'none';
 
@@ -1032,7 +1012,6 @@ function showReport() {
 
   g('newEntryBtn').style.display =
     'block';
-
 
   setTimeout(function () {
 
@@ -1175,7 +1154,6 @@ g('submitBtn')?.addEventListener(
 
     const need = [];
 
-
     if (!g('farmer').value.trim()) {
       need.push('शेतकऱ्याचे नाव');
     }
@@ -1200,10 +1178,8 @@ g('submitBtn')?.addEventListener(
       need.push('प्रत्यक्ष फोटो');
     }
 
-
     const gpsCheck =
       validateGPS();
-
 
     if (!gpsCheck.valid) {
 
@@ -1212,14 +1188,12 @@ g('submitBtn')?.addEventListener(
       );
     }
 
-
     if (!validateMobile()) {
 
       need.push(
         'योग्य 10 अंकी मोबाईल नंबर'
       );
     }
-
 
     if (need.length > 0) {
 
@@ -1241,7 +1215,6 @@ g('submitBtn')?.addEventListener(
       return;
     }
 
-
     if (gpsCheck.warning) {
 
       const confirmSubmit =
@@ -1256,7 +1229,6 @@ g('submitBtn')?.addEventListener(
       if (!confirmSubmit) return;
     }
 
-
     const submitBtn =
       g('submitBtn');
 
@@ -1268,7 +1240,6 @@ g('submitBtn')?.addEventListener(
 
     showMessage('', '');
 
-
     try {
 
       const file =
@@ -1276,7 +1247,6 @@ g('submitBtn')?.addEventListener(
 
       const imageData =
         await stamped(file);
-
 
       const fileName =
 
@@ -1303,7 +1273,6 @@ g('submitBtn')?.addEventListener(
         Date.now() +
 
         '.jpg';
-
 
       const data = {
 
@@ -1332,7 +1301,7 @@ g('submitBtn')?.addEventListener(
           g('statementFarmer')?.value.trim() || '',
 
         localStatement:
-          g('localStatement').value,
+          g('localStatement')?.value.trim() || '',
 
         receiptChecked:
           g('receiptChecked').value,
@@ -1365,7 +1334,6 @@ g('submitBtn')?.addEventListener(
           imageData.split(',')[1]
       };
 
-
       await fetch(
 
         URL,
@@ -1387,10 +1355,8 @@ g('submitBtn')?.addEventListener(
         }
       );
 
-
       reportData =
         createReportData();
-
 
       showMessage(
 
@@ -1399,14 +1365,12 @@ g('submitBtn')?.addEventListener(
         'success'
       );
 
-
       showAI(
 
         'प्रत्यक्ष पीक पडताळणीची माहिती यशस्वीरित्या नोंदविण्यात आली आहे.',
 
         'success'
       );
-
 
       showReport();
 
@@ -1502,8 +1466,11 @@ function resetForm() {
 
   }
 
-  g('localStatement').value =
-    'होय';
+  if (g('localStatement')) {
+
+    g('localStatement').value = '';
+
+  }
 
   g('receiptChecked').value =
     'होय';
@@ -1513,7 +1480,6 @@ function resetForm() {
 
   g('photo').value = '';
 
-
   const preview =
     g('preview');
 
@@ -1522,20 +1488,16 @@ function resetForm() {
   preview.style.display =
     'none';
 
-
   reportData = null;
-
 
   showMessage(
     '',
     ''
   );
 
-
   showAI(
     'फोटो Submit केल्यानंतर AI पडताळणीचा निकाल येथे दिसेल.'
   );
-
 
   const reportBox =
     g('reportBox');
@@ -1543,17 +1505,14 @@ function resetForm() {
   reportBox.style.display =
     'none';
 
-
   g('reportContent').innerHTML =
     '';
-
 
   g('reportEditor').value =
     '';
 
   g('reportEditor').style.display =
     'none';
-
 
   g('reportBtn').style.display =
     'block';
@@ -1570,12 +1529,10 @@ function resetForm() {
   g('newEntryBtn').style.display =
     'none';
 
-
   lat = '';
   lng = '';
   accuracy = '';
   gpsTimestamp = '';
-
 
   setTimeout(
     getGPS,
