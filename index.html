@@ -31,16 +31,11 @@
 <div class="card">
 
 
-<!-- =========================================
-     GOVERNMENT HEADER
-========================================= -->
+<!-- GOVERNMENT HEADER -->
 
 <div class="header">
 
   <div class="government-header">
-
-
-    <!-- भारत सरकार लोगो -->
 
     <div class="logo-box">
 
@@ -52,8 +47,6 @@
 
     </div>
 
-
-    <!-- TITLE -->
 
     <div class="header-title">
 
@@ -72,8 +65,6 @@
     </div>
 
 
-    <!-- महाराष्ट्र शासन लोगो -->
-
     <div class="logo-box">
 
       <img
@@ -83,7 +74,6 @@
         id="maharashtraLogo">
 
     </div>
-
 
   </div>
 
@@ -115,7 +105,6 @@
   placeholder="शेतकऱ्याचे पूर्ण नाव लिहा">
 
 </div>
-
 
 
 <div class="form-group">
@@ -151,7 +140,6 @@
 </div>
 
 
-
 <div class="form-group">
 
 <label for="survey">
@@ -164,7 +152,6 @@
   placeholder="उदा. 46/1/अ">
 
 </div>
-
 
 
 <div class="form-group">
@@ -180,7 +167,6 @@
   placeholder="उदा. 2.50">
 
 </div>
-
 
 
 <div class="form-group">
@@ -211,7 +197,6 @@
 </div>
 
 
-
 <div class="form-group">
 
 <label for="eCrop">
@@ -235,7 +220,6 @@
 </select>
 
 </div>
-
 
 
 <div class="form-group">
@@ -272,27 +256,59 @@
 
 
 
-<div class="form-group">
+<!-- =========================================
+     शेतकऱ्याचे बयान
+========================================= -->
 
-<label for="localStatement">
-स्थानिक शेतकऱ्यांचे बयान
-</label>
+<div class="section-title">
 
-<select id="localStatement">
-
-<option value="होय">
-होय
-</option>
-
-<option value="नाही">
-नाही
-</option>
-
-</select>
+📝 शेतकऱ्याचे बयान
 
 </div>
 
 
+<div class="form-group">
+
+<label for="localStatement">
+
+शेतकऱ्याचे प्रत्यक्ष बयान
+
+</label>
+
+<textarea
+  id="localStatement"
+  rows="5"
+  placeholder="शेतकऱ्याचे बयान येथे लिहा..."></textarea>
+
+<small class="photo-note">
+
+उदा. सदर शेतकरी यांनी त्यांच्या शेतात ज्वारी पिकाची लागवड केली होती व सदर ज्वारी पिकाची पाहणी करण्यात आली असल्याचे सांगितले आहे.
+
+</small>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="statementFarmer">
+
+बयान देणाऱ्या शेतकऱ्याचे नाव
+
+</label>
+
+<input
+  id="statementFarmer"
+  type="text"
+  placeholder="शेतकऱ्याचे पूर्ण नाव">
+
+</div>
+
+
+
+<!-- =========================================
+     कागदपत्र पडताळणी
+========================================= -->
 
 <div class="form-group">
 
@@ -315,7 +331,6 @@
 </div>
 
 
-
 <div class="form-group">
 
 <label for="officer">
@@ -328,7 +343,6 @@
   placeholder="अधिकाऱ्याचे पूर्ण नाव">
 
 </div>
-
 
 
 <div class="form-group">
@@ -345,9 +359,7 @@
 
 
 
-<!-- =========================================
-     GPS SECTION
-========================================= -->
+<!-- GPS -->
 
 <div class="section-title">
 
@@ -397,9 +409,7 @@
 
 
 
-<!-- =========================================
-     PHOTO SECTION
-========================================= -->
+<!-- PHOTO -->
 
 <div class="section-title">
 
@@ -429,7 +439,6 @@
 </div>
 
 
-
 <div class="preview-container">
 
 <img
@@ -440,9 +449,7 @@
 
 
 
-<!-- =========================================
-     AI RESULT
-========================================= -->
+<!-- AI RESULT -->
 
 <div
   id="aiResult"
@@ -464,9 +471,7 @@
 
 
 
-<!-- =========================================
-     SUBMIT BUTTON
-========================================= -->
+<!-- SUBMIT -->
 
 <button
   type="button"
@@ -477,11 +482,6 @@
 
 </button>
 
-
-
-<!-- =========================================
-     SUCCESS / ERROR MESSAGE
-========================================= -->
 
 <div
   id="msg"
@@ -500,145 +500,104 @@
   class="report-box"
   style="display:none;">
 
+<div class="report-title">
 
-  <!-- REPORT TITLE -->
+📄 ज्वारी पीक पडताळणी अहवाल
 
-  <div class="report-title">
-
-    📄 ज्वारी पीक पडताळणी अहवाल
-
-  </div>
+</div>
 
 
-  <!-- SUCCESS MESSAGE -->
+<div
+  id="reportContent"
+  class="report-content">
 
-  <div
-    id="reportStatus"
-    style="display:none;">
-
-    माहिती यशस्वीरित्या साठविण्यात आली आहे.
-
-  </div>
+</div>
 
 
-  <!-- REPORT CONTENT -->
-
-  <div
-    id="reportContent"
-    class="report-content">
-
-  </div>
+<textarea
+  id="reportEditor"
+  class="report-editor"
+  style="display:none;"
+  placeholder="येथे अहवाल Edit करा..."></textarea>
 
 
-  <!-- EDIT REPORT -->
-
-  <textarea
-    id="reportEditor"
-    class="report-editor"
-    style="display:none;"
-    placeholder="येथे अहवाल Edit करा..."></textarea>
+<div class="report-actions">
 
 
+<button
+  type="button"
+  id="reportBtn"
+  class="report-btn">
 
-  <!-- REPORT ACTION BUTTONS -->
+📄 पडताळणी अहवाल तयार करा
 
-  <div class="report-actions">
-
-
-    <!-- REPORT -->
-
-    <button
-      type="button"
-      id="reportBtn"
-      class="report-btn">
-
-      📄 पडताळणी अहवाल तयार करा
-
-    </button>
+</button>
 
 
-    <!-- EDIT -->
+<button
+  type="button"
+  id="editReportBtn"
+  class="edit-btn"
+  style="display:none;">
 
-    <button
-      type="button"
-      id="editReportBtn"
-      class="edit-btn"
-      style="display:none;">
+✏️ अहवाल Edit करा
 
-      ✏️ अहवाल Edit करा
-
-    </button>
+</button>
 
 
-    <!-- SAVE -->
+<button
+  type="button"
+  id="saveReportBtn"
+  class="save-btn"
+  style="display:none;">
 
-    <button
-      type="button"
-      id="saveReportBtn"
-      class="save-btn"
-      style="display:none;">
+💾 बदल जतन करा
 
-      💾 बदल जतन करा
-
-    </button>
+</button>
 
 
-    <!-- PRINT -->
+<button
+  type="button"
+  id="printBtn"
+  class="print-btn"
+  style="display:none;">
 
-    <button
-      type="button"
-      id="printBtn"
-      class="print-btn"
-      style="display:none;">
+🖨️ Print / PDF
 
-      🖨️ Print / PDF
-
-    </button>
+</button>
 
 
-    <!-- NEW ENTRY -->
+<button
+  type="button"
+  id="newEntryBtn"
+  class="new-btn"
+  style="display:none;">
 
-    <button
-      type="button"
-      id="newEntryBtn"
-      class="new-btn"
-      style="display:none;">
+➕ नवीन नोंद करा
 
-      ➕ नवीन नोंद करा
+</button>
 
-    </button>
-
-
-  </div>
-
+</div>
 
 </div>
 
 
 
-<!-- =========================================
-     FOOTER
-========================================= -->
+<!-- FOOTER -->
 
 <div class="footer">
 
-  <div>
+<div>
+🌾 ज्वारी पीक पडताळणी प्रणाली
+</div>
 
-    🌾 ज्वारी पीक पडताळणी प्रणाली
+<small>
+GPS आधारित प्रत्यक्ष पीक पडताळणी
+</small>
 
-  </div>
-
-  <small>
-
-    GPS आधारित प्रत्यक्ष पीक पडताळणी
-
-  </small>
-
-  <small>
-
-    ग्राम महसूल अधिकारी कार्यालय
-
-  </small>
+<small>
+ग्राम महसूल अधिकारी कार्यालय
+</small>
 
 </div>
 
