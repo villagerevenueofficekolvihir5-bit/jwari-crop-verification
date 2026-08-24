@@ -1,670 +1,219 @@
 <!DOCTYPE html>
 <html lang="mr">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0">
-
-<meta
-  name="theme-color"
-  content="#1b5e20">
-
-<meta
-  name="description"
-  content="ज्वारी पीक प्रत्यक्ष पडताळणी व GPS आधारित नोंदणी प्रणाली">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1b5e20">
 <title>ज्वारी पीक पडताळणी प्रणाली</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
-
 <body>
-
 <div class="container">
-
 <div class="card">
 
-
-<!-- =========================================
-     GOVERNMENT HEADER
-========================================= -->
-
 <div class="header">
-
   <div class="government-header">
-
-    <div class="logo-box">
-
-      <img
-        src="satymevjayate .png"
-        alt="भारत सरकार - सत्यमेव जयते"
-        class="gov-logo">
-
-    </div>
-
-
+    <div class="logo-box"><img src="satymevjayate.png" alt="सत्यमेव जयते" class="gov-logo"></div>
     <div class="header-title">
-
-      <h1>
-        🌾 ज्वारी पीक पडताळणी
-      </h1>
-
-      <p>
-        Crop Verification System
-      </p>
-
-      <small>
-        ग्राम महसूल अधिकारी कार्यालय
-      </small>
-
+      <h1>🌾 ज्वारी पीक पडताळणी</h1>
+      <p>Crop Verification System</p>
+      <small>ग्राम महसूल अधिकारी कार्यालय</small>
     </div>
-
-
-    <div class="logo-box">
-
-      <img
-        src="maharashtra shasan .png"
-        alt="महाराष्ट्र शासन"
-        class="gov-logo">
-
-    </div>
-
+    <div class="logo-box"><img src="maharashtra-shasan.png" alt="महाराष्ट्र शासन" class="gov-logo"></div>
   </div>
-
 </div>
 
-
-
-<!-- =========================================
-     शेतकरी माहिती
-========================================= -->
-
-<div class="section-title">
-👨‍🌾 शेतकरी माहिती
-</div>
-
+<div class="section-title">👨‍🌾 शेतकरी माहिती</div>
 
 <div class="form-group">
-
-<label for="farmer">
-शेतकऱ्याचे पूर्ण नाव *
-</label>
-
-<input
-  id="farmer"
-  type="text"
-  autocomplete="name"
-  placeholder="शेतकऱ्याचे पूर्ण नाव लिहा">
-
+<label for="farmer">शेतकऱ्याचे पूर्ण नाव *</label>
+<input id="farmer" type="text" placeholder="शेतकऱ्याचे पूर्ण नाव लिहा">
 </div>
 
-
 <div class="form-group">
-
-<label for="village">
-गाव *
-</label>
-
+<label for="village">गाव *</label>
 <select id="village">
-
-<option value="">
--- गाव निवडा --
-</option>
-
-<option value="कोळविहीर">
-कोळविहीर
-</option>
-
-<option value="आष्टोली">
-आष्टोली
-</option>
-
-<option value="डोमक">
-डोमक
-</option>
-
-<option value="यादवपूर">
-यादवपूर
-</option>
-
+<option value="">-- गाव निवडा --</option>
+<option value="कोळविहीर">कोळविहीर</option>
+<option value="आष्टोली">आष्टोली</option>
+<option value="डोमक">डोमक</option>
+<option value="यादवपूर">यादवपूर</option>
 </select>
-
 </div>
-
 
 <div class="form-group">
-
-<label for="survey">
-गट / सर्वे नंबर *
-</label>
-
-<input
-  id="survey"
-  type="text"
-  placeholder="उदा. 46/1/अ">
-
+<label for="survey">गट / सर्वे नंबर *</label>
+<input id="survey" type="text" placeholder="उदा. 45">
 </div>
-
 
 <div class="form-group">
-
-<label for="area">
-क्षेत्र (हे.आर.)
-</label>
-
-<input
-  id="area"
-  type="text"
-  inputmode="decimal"
-  placeholder="उदा. 2.50">
-
+<label for="area">क्षेत्र (हे.आर.)</label>
+<input id="area" type="text" placeholder="उदा. 2.50">
 </div>
-
 
 <div class="form-group">
-
-<label for="mobile">
-मोबाईल नंबर
-</label>
-
-<input
-  id="mobile"
-  type="tel"
-  inputmode="numeric"
-  maxlength="10"
-  placeholder="उदा. 9876543210">
-
+<label for="mobile">मोबाईल नंबर</label>
+<input id="mobile" type="tel" maxlength="10" placeholder="उदा. 9876543210">
 </div>
 
-
-
-<!-- =========================================
-     पीक पडताळणी माहिती
-========================================= -->
-
-<div class="section-title">
-🌾 पीक पडताळणी माहिती
-</div>
-
+<div class="section-title">🌾 पीक पडताळणी माहिती</div>
 
 <div class="form-group">
-
-<label for="eCrop">
-ई-पीक पाहणीतील नोंद *
-</label>
-
+<label for="eCrop">ई-पीक पाहणीतील नोंद *</label>
 <select id="eCrop">
-
-<option value="">
--- निवडा --
-</option>
-
-<option value="ज्वारी">
-ज्वारी
-</option>
-
-<option value="इतर">
-इतर
-</option>
-
+<option value="">-- निवडा --</option>
+<option value="ज्वारी">ज्वारी</option>
+<option value="इतर">इतर</option>
 </select>
-
 </div>
 
-
 <div class="form-group">
-
-<label for="actualStatus">
-प्रत्यक्ष पाहणीतील स्थिती *
-</label>
-
+<label for="actualStatus">प्रत्यक्ष पाहणीतील स्थिती *</label>
 <select id="actualStatus">
-
-<option value="">
--- निवडा --
-</option>
-
-<option value="ज्वारीचे पीक प्रत्यक्ष आहे">
-ज्वारीचे पीक प्रत्यक्ष आहे
-</option>
-
-<option value="ज्वारीचे पीक प्रत्यक्ष नाही">
-ज्वारीचे पीक प्रत्यक्ष नाही
-</option>
-
-<option value="काढणी झालेले / अवशेष उपलब्ध">
-काढणी झालेले / अवशेष उपलब्ध
-</option>
-
-<option value="पुढील चौकशी आवश्यक">
-पुढील चौकशी आवश्यक
-</option>
-
+<option value="">-- निवडा --</option>
+<option value="ज्वारीचे पीक प्रत्यक्ष आहे">ज्वारीचे पीक प्रत्यक्ष आहे</option>
+<option value="ज्वारीचे पीक प्रत्यक्ष नाही">ज्वारीचे पीक प्रत्यक्ष नाही</option>
+<option value="काढणी झालेले / अवशेष उपलब्ध">काढणी झालेले / अवशेष उपलब्ध</option>
+<option value="पुढील चौकशी आवश्यक">पुढील चौकशी आवश्यक</option>
 </select>
-
 </div>
 
-
-
-<!-- =========================================
-     शेतकऱ्याचे बयान
-========================================= -->
-
-<div class="section-title">
-📝 शेतकऱ्याचे बयान
-</div>
-
+<div class="section-title">📝 शेतकऱ्याचे बयान</div>
 
 <div class="form-group">
-
-<label for="localStatement">
-शेतकऱ्याचे प्रत्यक्ष बयान
-</label>
-
-<textarea
-  id="localStatement"
-  rows="5"
-  placeholder="शेतकऱ्याचे बयान येथे लिहा..."></textarea>
-
-<small class="photo-note">
-
-उदा. सदर शेतकरी यांनी त्यांच्या शेतात ज्वारी पिकाची लागवड केली होती व सदर ज्वारी पिकाची पाहणी करण्यात आली असल्याचे सांगितले आहे.
-
-</small>
-
+<label for="statementType">Default बयान निवडा</label>
+<select id="statementType">
+<option value="">-- बयान निवडा --</option>
+<option value="cropYes">ज्वारीचे पीक आहे</option>
+<option value="cropNo">ज्वारीचे पीक नाही</option>
+</select>
 </div>
 
-
 <div class="form-group">
-
-<label for="statementFarmer">
-बयान देणाऱ्या शेतकऱ्याचे नाव
-</label>
-
-<input
-  id="statementFarmer"
-  type="text"
-  placeholder="शेतकऱ्याचे पूर्ण नाव">
-
+<label for="statementFarmer">बयान देणाऱ्या व्यक्तीचे नाव</label>
+<input id="statementFarmer" type="text" placeholder="बयान देणाऱ्या व्यक्तीचे पूर्ण नाव">
+<small class="photo-note">बयान देणारी व्यक्ती आणि शेतकरी वेगळे असू शकतात.</small>
 </div>
 
-
-
-<!-- =========================================
-     कागदपत्र पडताळणी
-========================================= -->
+<div class="form-group">
+<label for="localStatement">शेतकऱ्याचे प्रत्यक्ष बयान</label>
+<textarea id="localStatement" rows="7" placeholder="Default बयान निवडा किंवा येथे बयान लिहा..."></textarea>
+</div>
 
 <div class="form-group">
+<label for="statementDate">बयानाचा दिनांक</label>
+<input id="statementDate" type="date">
+</div>
 
-<label for="receiptChecked">
-खत / बियाणे पावती पाहिली
-</label>
+<div class="form-group">
+<label for="witness1">साक्षीदार क्र. १ चे नाव</label>
+<input id="witness1" type="text" placeholder="साक्षीदाराचे नाव">
+</div>
 
+<div class="form-group">
+<label for="witness2">साक्षीदार क्र. २ चे नाव</label>
+<input id="witness2" type="text" placeholder="साक्षीदाराचे नाव">
+</div>
+
+<div class="section-title">📄 कागदपत्र पडताळणी</div>
+
+<div class="form-group">
+<label for="receiptChecked">खत / बियाणे पावती पाहिली</label>
 <select id="receiptChecked">
-
-<option value="होय">
-होय
-</option>
-
-<option value="नाही">
-नाही
-</option>
-
+<option value="नाही">नाही</option>
+<option value="होय">होय</option>
 </select>
-
 </div>
 
+<div class="form-group" id="receiptPhotoGroup" style="display:none;">
+<label for="receiptPhoto">खत / बियाणे पावतीचा फोटो</label>
+<input id="receiptPhoto" type="file" accept="image/*" capture="environment">
+<img id="receiptPreview" class="file-preview" alt="पावती फोटो">
+</div>
 
 <div class="form-group">
-
-<label for="officer">
-पडताळणी अधिकाऱ्याचे नाव
-</label>
-
-<input
-  id="officer"
-  type="text"
-  placeholder="अधिकाऱ्याचे पूर्ण नाव">
-
+<label for="officer">पडताळणी अधिकाऱ्याचे नाव</label>
+<input id="officer" type="text" placeholder="अधिकाऱ्याचे पूर्ण नाव">
 </div>
-
 
 <div class="form-group">
-
-<label for="remark">
-शेरा
-</label>
-
-<textarea
-  id="remark"
-  placeholder="आवश्यक असल्यास शेरा लिहा"></textarea>
-
+<label for="remark">शेरा</label>
+<textarea id="remark" placeholder="आवश्यक असल्यास शेरा लिहा"></textarea>
 </div>
 
-
-
-<!-- =========================================
-     GPS
-========================================= -->
-
-<div class="section-title">
-📍 GPS Location
+<div class="section-title">📍 GPS Location</div>
+<div class="gps-box" id="gps">
+  <strong id="gpsText">📍 GPS Location मिळवत आहे...</strong>
+  <div id="gpsDetails">कृपया मोबाईलची Location / GPS ON ठेवा.</div>
 </div>
+<button type="button" class="secondary-btn" id="gpsBtn">📍 GPS पुन्हा मिळवा</button>
 
-
-<div
-  class="gps-box"
-  id="gps">
-
-  📍 GPS Location मिळवत आहे...
-
-</div>
-
-
-<button
-  type="button"
-  class="secondary-btn"
-  id="gpsBtn">
-
-📍 GPS पुन्हा मिळवा
-
-</button>
-
-
-
-<!-- =========================================
-     PHOTO
-========================================= -->
-
-<div class="section-title">
-📷 प्रत्यक्ष पीक फोटो
-</div>
-
-
+<div class="section-title">📷 प्रत्यक्ष पीक फोटो</div>
 <div class="form-group">
-
-<label for="photo">
-प्रत्यक्ष फोटो *
-</label>
-
-<input
-  id="photo"
-  type="file"
-  accept="image/*"
-  capture="environment">
-
-<small class="photo-note">
-
-📸 शक्य असल्यास कॅमेराद्वारे प्रत्यक्ष शेतातील फोटो घ्या.
-
-</small>
-
+<label for="photo">प्रत्यक्ष फोटो *</label>
+<input id="photo" type="file" accept="image/*" capture="environment">
+<small class="photo-note">📸 शक्य असल्यास कॅमेराद्वारे प्रत्यक्ष शेतातील फोटो घ्या.</small>
+<img id="preview" alt="प्रत्यक्ष फोटो Preview">
 </div>
 
-
-<div class="preview-container">
-
-<img
-  id="preview"
-  alt="प्रत्यक्ष फोटो Preview">
-
+<div id="aiResult" class="ai-box">
+<div class="ai-title">🤖 पडताळणी माहिती</div>
+<div>फोटो, GPS व फॉर्मची माहिती जतन केल्यानंतर पडताळणी अहवाल तयार करता येईल.</div>
 </div>
 
+<button type="button" id="submitBtn" class="submit-btn">✅ माहिती Submit करा</button>
+<div id="msg" role="alert"></div>
 
-
-<!-- =========================================
-     AI RESULT
-========================================= -->
-
-<div
-  id="aiResult"
-  class="ai-box">
-
-  <div class="ai-title">
-    🤖 पडताळणी माहिती
-  </div>
-
-  <div id="aiText">
-
-    फोटो Submit केल्यानंतर पडताळणी अहवाल तयार करता येईल.
-
-  </div>
-
-</div>
-
-
-
-<!-- =========================================
-     SUBMIT
-========================================= -->
-
-<button
-  type="button"
-  id="submitBtn"
-  class="submit-btn">
-
-✅ माहिती Submit करा
-
-</button>
-
-
-<div
-  id="msg"
-  role="alert">
-
-</div>
-
-
-
-<!-- =========================================
-     INDIVIDUAL REPORT
-========================================= -->
-
-<div
-  id="reportBox"
-  class="report-box"
-  style="display:none;">
-
-<div class="report-title">
-📄 ज्वारी पीक पडताळणी अहवाल
-</div>
-
-
-<div
-  id="reportContent"
-  class="report-content">
-
-</div>
-
-
-<textarea
-  id="reportEditor"
-  class="report-editor"
-  style="display:none;"
-  placeholder="येथे अहवाल Edit करा..."></textarea>
-
-
+<div id="reportBox" class="report-box" style="display:none;">
+<div class="report-title">📄 ज्वारी पीक पडताळणी अहवाल</div>
+<div id="reportContent" class="report-content"></div>
+<textarea id="reportEditor" class="report-editor" style="display:none;"></textarea>
 <div class="report-actions">
-
-
-<button
-  type="button"
-  id="reportBtn"
-  class="report-btn">
-
-📄 पडताळणी अहवाल तयार करा
-
-</button>
-
-
-<button
-  type="button"
-  id="editReportBtn"
-  class="edit-btn"
-  style="display:none;">
-
-✏️ अहवाल Edit करा
-
-</button>
-
-
-<button
-  type="button"
-  id="saveReportBtn"
-  class="save-btn"
-  style="display:none;">
-
-💾 बदल जतन करा
-
-</button>
-
-
-<button
-  type="button"
-  id="printBtn"
-  class="print-btn"
-  style="display:none;">
-
-🖨️ वैयक्तिक अहवाल Print / PDF
-
-</button>
-
-
-<button
-  type="button"
-  id="newEntryBtn"
-  class="new-btn"
-  style="display:none;">
-
-➕ नवीन नोंद करा
-
-</button>
-
+<button type="button" id="reportBtn" class="report-btn" style="display:none;">📄 पडताळणी अहवाल तयार करा</button>
+<button type="button" id="editReportBtn" class="edit-btn" style="display:none;">✏️ अहवाल Edit करा</button>
+<button type="button" id="saveReportBtn" class="save-btn" style="display:none;">💾 बदल जतन करा</button>
+<button type="button" id="printBtn" class="print-btn" style="display:none;">🖨️ Print / PDF</button>
+<button type="button" id="uploadSignedBtn" class="upload-btn" style="display:none;">📤 सही केलेला अहवाल Upload करा</button>
+<button type="button" id="newEntryBtn" class="new-btn" style="display:none;">➕ नवीन नोंद करा</button>
+</div>
 </div>
 
-</div>
-
-
-
-<!-- =========================================
-     CONSOLIDATED REPORT
-========================================= -->
-
-<div class="section-title">
-📊 एकत्रित अहवाल
-</div>
-
-
+<div class="section-title">📤 सही केलेला अहवाल Upload</div>
 <div class="form-group">
+<label for="signedReport">शेतकऱ्याची सही असलेला Report / PDF / फोटो</label>
+<input id="signedReport" type="file" accept=".pdf,image/*">
+<small class="photo-note">प्रिंट काढून सही घेतल्यानंतर हा अहवाल पुन्हा Digital Record म्हणून Upload करता येईल.</small>
+</div>
 
-<label for="reportVillage">
-गावानुसार अहवाल
-</label>
-
+<div class="section-title">📊 एकत्रित अहवाल</div>
+<div class="form-group">
+<label for="reportVillage">गावनुसार अहवाल</label>
 <select id="reportVillage">
-
-<option value="">
-सर्व गावांचा एकत्रित अहवाल
-</option>
-
-<option value="कोळविहीर">
-कोळविहीर
-</option>
-
-<option value="आष्टोली">
-आष्टोली
-</option>
-
-<option value="डोमक">
-डोमक
-</option>
-
-<option value="यादवपूर">
-यादवपूर
-</option>
-
+<option value="">सर्व गावांचा एकत्रित अहवाल</option>
+<option value="कोळविहीर">कोळविहीर</option>
+<option value="आष्टोली">आष्टोली</option>
+<option value="डोमक">डोमक</option>
+<option value="यादवपूर">यादवपूर</option>
 </select>
-
 </div>
+<button type="button" id="combinedReportBtn" class="combined-btn">📊 एकत्रित अहवाल तयार करा</button>
+<div id="combinedReportBox" class="combined-report-box" style="display:none;"></div>
 
-
-<button
-  type="button"
-  id="consolidatedBtn"
-  class="consolidated-btn">
-
-📊 एकत्रित अहवाल तयार करा
-
-</button>
-
-
-
-<div
-  id="consolidatedBox"
-  class="report-box"
-  style="display:none;">
-
-<div class="report-title">
-📊 ज्वारी पीक पडताळणी एकत्रित अहवाल
+<div class="section-title">🔎 जुनी नोंद शोधा</div>
+<div class="form-group">
+<input id="searchRecord" type="text" placeholder="Report ID / शेतकऱ्याचे नाव / सर्वे नंबर">
 </div>
-
-
-<div id="consolidatedContent">
-
-</div>
-
-
-<div class="report-actions">
-
-<button
-  type="button"
-  id="printConsolidatedBtn"
-  class="print-btn">
-
-🖨️ एकत्रित अहवाल Print / PDF
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<!-- =========================================
-     FOOTER
-========================================= -->
+<button type="button" id="searchBtn" class="secondary-btn">🔎 शोधा</button>
+<div id="searchResults" class="search-results"></div>
 
 <div class="footer">
-
-<div>
-🌾 ज्वारी पीक पडताळणी प्रणाली
-</div>
-
-<small>
-GPS आधारित प्रत्यक्ष पीक पडताळणी
-</small>
-
-<small>
-ग्राम महसूल अधिकारी कार्यालय
-</small>
-
-</div>
-
-
+<div>🌾 ज्वारी पीक पडताळणी प्रणाली</div>
+<small>GPS आधारित प्रत्यक्ष पीक पडताळणी</small><br>
+<small>ग्राम महसूल अधिकारी कार्यालय</small>
 </div>
 
 </div>
-
-
+</div>
 <script src="app.js"></script>
-
 </body>
-
 </html>
